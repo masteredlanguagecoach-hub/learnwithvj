@@ -22,10 +22,9 @@ export interface RegistrationRecord {
 
 const DB_FILE_PATH = path.join(process.cwd(), 'data_registrations.json');
 
-// Memory cache for super fast response times
+// Memory cache for local dev / fast response times
 let inMemoryRegistrations: RegistrationRecord[] = [];
 
-// Initialize memory cache from JSON file if exists
 function loadStorage(): RegistrationRecord[] {
   try {
     if (fs.existsSync(DB_FILE_PATH)) {
@@ -76,7 +75,9 @@ export const db = {
 
   save(record: RegistrationRecord): RegistrationRecord {
     const records = loadStorage();
-    const existingIndex = records.findIndex((r) => r.registrationId === record.registrationId || r.orderId === record.orderId);
+    const existingIndex = records.findIndex(
+      (r) => r.registrationId === record.registrationId || (record.orderId && r.orderId === record.orderId)
+    );
     if (existingIndex >= 0) {
       records[existingIndex] = record;
     } else {
@@ -84,13 +85,6 @@ export const db = {
     }
     inMemoryRegistrations = records;
     persistStorage();
-
-    // Trigger Google Sheets Webhook background sync if configured
-    if (record.status === 'SUCCESS') {
-      this.syncToGoogleSheets(record).catch((err) => {
-        console.error('Google Sheets background sync notice:', err.message);
-      });
-    }
 
     return record;
   },
@@ -135,16 +129,40 @@ export const db = {
     return false;
   },
 
-  getAnalytics() {
-    const records = loadStorage();
+  async fetchFromGoogleSheets(): Promise<RegistrationRecord[]> {
+    const webhookUrl =
+      process.env.GOOGLE_SHEETS_WEBHOOK_URL ||
+      'https://script.google.com/macros/s/AKfycbxGJAt_gcu3aYtzYOM8LYyFQgdZLJoMS7B__BJ9FSdL2rqaE_My3L6WIAeV4wkXwsc6yQ/exec';
+
+    try {
+      const res = await fetch(webhookUrl, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        redirect: 'follow',
+        cache: 'no-store',
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.registrations && Array.isArray(data.registrations)) {
+          return data.registrations;
+        }
+      }
+    } catch (err: any) {
+      console.error('Notice fetching from Google Sheets:', err.message);
+    }
+    return [];
+  },
+
+  calculateAnalytics(records: RegistrationRecord[]) {
     const successful = records.filter((r) => r.status === 'SUCCESS');
-    const totalRevenue = successful.reduce((sum, r) => sum + r.amount, 0);
-    
+    const totalRevenue = successful.reduce((sum, r) => sum + (Number(r.amount) || 3), 0);
+
     const todayStr = new Date().toISOString().slice(0, 10);
     const todaySales = successful.filter((r) => r.date.startsWith(todayStr) || r.createdAt.startsWith(todayStr)).length;
     const todayRevenue = successful
       .filter((r) => r.date.startsWith(todayStr) || r.createdAt.startsWith(todayStr))
-      .reduce((sum, r) => sum + r.amount, 0);
+      .reduce((sum, r) => sum + (Number(r.amount) || 3), 0);
 
     const pendingCount = records.filter((r) => r.status === 'PENDING').length;
 
