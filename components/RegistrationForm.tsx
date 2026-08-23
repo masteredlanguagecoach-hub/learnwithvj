@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
-import { ShieldCheck, Lock, Loader2, AlertCircle, User, Mail, Phone, MapPin, Briefcase, HelpCircle } from 'lucide-react';
+import { ShieldCheck, Lock, Loader2, AlertCircle, User, Mail, Phone, MapPin, Briefcase, HelpCircle, Calendar } from 'lucide-react';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Please enter your full name'),
@@ -111,7 +111,7 @@ export default function RegistrationForm() {
         amount: amount,
         currency: 'INR',
         name: 'Learn with Veeje',
-        description: 'AI Business System Design Masterclass Registration',
+        description: 'AI Business System Design Masterclass (Sept 1)',
         order_id: orderId,
         prefill: {
           name: data.name,
@@ -199,8 +199,8 @@ export default function RegistrationForm() {
         
         {/* Header */}
         <div className="text-center max-w-xl mx-auto mb-10 space-y-3">
-          <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-full border border-emerald-500/20 inline-block">
-            Instant Enrollment
+          <span className="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20 inline-flex items-center gap-1.5">
+            <Calendar className="w-3.5 h-3.5" /> Event Date: September 1, 2026
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
             Reserve Your Seat Now
@@ -353,7 +353,7 @@ export default function RegistrationForm() {
                 </div>
                 <div className="text-right">
                   <span className="text-xs text-slate-500 line-through mr-2">₹999</span>
-                  <span className="text-2xl font-black text-white">₹249</span>
+                  <span className="text-2xl font-black text-white">₹3</span>
                 </div>
               </div>
 
@@ -370,7 +370,7 @@ export default function RegistrationForm() {
                 ) : (
                   <>
                     <Lock className="w-5 h-5 text-blue-300" />
-                    <span>Proceed to Pay ₹249</span>
+                    <span>Proceed to Pay ₹3</span>
                   </>
                 )}
               </button>

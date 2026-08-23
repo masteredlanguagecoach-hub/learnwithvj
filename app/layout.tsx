@@ -1,55 +1,43 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import './globals.css';
 
-const jakarta = Plus_Jakarta_Sans({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-jakarta',
+  variable: '--font-sans',
   display: 'swap',
 });
 
 export const metadata: Metadata = {
   title: 'AI Business System Design Masterclass | Learn with Veeje',
   description:
-    'Design • Build • Automate • Deploy. Learn how to convert business ideas into complete business systems using AI, Google Sheets and Web Apps without traditional programming. Live 2 Hours 30 Minutes Workshop for ₹249.',
+    'Master Business System Design, Google Sheets Database Architecture & Web App Automation with AI. Live 2.5-Hour Practical Workshop on September 1, 2026.',
   keywords: [
     'AI Business System Design',
     'Learn with Veeje',
     'Google Sheets Database',
-    'Business Web Apps',
-    'Apps Script Automation',
+    'Web App Automation',
+    'Business Dashboards',
     'No Code Systems',
-    'Business Process Analysis',
     'Veeje Masterclass',
   ],
-  authors: [{ name: 'Veeje' }],
+  authors: [{ name: 'Veeje', url: 'https://wa.me/916282548226' }],
   openGraph: {
-    title: 'AI Business System Design Masterclass - Learn with Veeje',
-    description:
-      'Design • Build • Automate • Deploy. Learn how to design complete business systems, build databases in Google Sheets, connect them to web applications and use AI to automate development. Live Workshop for ₹249.',
-    url: 'https://learnwithveeje.com',
-    siteName: 'Learn with Veeje',
-    locale: 'en_IN',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
     title: 'AI Business System Design Masterclass | Learn with Veeje',
     description:
-      'Design • Build • Automate • Deploy. Learn how to convert business ideas into complete business systems. Live Workshop for ₹249.',
-  },
-  robots: {
-    index: true,
-    follow: true,
+      'Convert business ideas into complete web apps & Google Sheets databases without traditional programming. Live on September 1, 2026.',
+    type: 'website',
+    locale: 'en_IN',
+    siteName: 'Learn with Veeje',
   },
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
-  const jsonLdCourse = {
+}>) {
+  const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Course',
     name: 'AI Business System Design Masterclass',
@@ -58,27 +46,26 @@ export default function RootLayout({
     provider: {
       '@type': 'Organization',
       name: 'Learn with Veeje',
-      sameAs: 'https://learnwithveeje.com',
+      sameAs: 'https://wa.me/916282548226',
     },
+    startDate: '2026-09-01',
     offers: {
       '@type': 'Offer',
-      price: '249',
+      price: '3',
       priceCurrency: 'INR',
       availability: 'https://schema.org/InStock',
-      url: 'https://learnwithveeje.com',
     },
-    educationalLevel: 'Beginner',
   };
 
   return (
-    <html lang="en" className={`${jakarta.variable} font-sans`}>
+    <html lang="en" className="scroll-smooth">
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdCourse) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-slate-950 text-slate-100 min-h-screen font-sans">
+      <body className={`${inter.variable} font-sans bg-slate-950 text-slate-100 antialiased selection:bg-blue-500 selection:text-white`}>
         {children}
       </body>
     </html>

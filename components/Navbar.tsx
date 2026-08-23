@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Sparkles, ArrowRight, Menu, X, ShieldCheck } from 'lucide-react';
+import { Sparkles, ArrowRight, Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -43,10 +43,10 @@ export default function Navbar() {
             <span className="text-lg font-bold tracking-tight text-white flex items-center gap-1.5">
               Learn with Veeje
               <span className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                LIVE
+                SEP 1
               </span>
             </span>
-            <span className="text-xs text-slate-400 block -mt-0.5">AI Business Intelligence</span>
+            <span className="text-xs text-slate-400 block -mt-0.5">AI System Design</span>
           </div>
         </div>
 
@@ -59,7 +59,7 @@ export default function Navbar() {
             Curriculum
           </button>
           <button onClick={() => scrollToSection('dashboards')} className="hover:text-blue-400 transition-colors">
-            Business Dashboards
+            Business Systems
           </button>
           <button onClick={() => scrollToSection('custom-systems')} className="hover:text-amber-400 transition-colors flex items-center gap-1">
             Custom Systems
@@ -73,7 +73,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center space-x-4">
           <div className="text-right">
             <span className="text-xs text-slate-400 block line-through">₹999</span>
-            <span className="text-sm font-bold text-emerald-400">₹249 ONLY</span>
+            <span className="text-sm font-bold text-emerald-400">₹3 ONLY</span>
           </div>
           <button
             onClick={() => scrollToSection('register')}
@@ -105,7 +105,7 @@ export default function Navbar() {
               Curriculum
             </button>
             <button onClick={() => scrollToSection('dashboards')} className="text-left py-2 hover:text-blue-400">
-              Business Dashboards
+              Business Systems
             </button>
             <button onClick={() => scrollToSection('custom-systems')} className="text-left py-2 text-amber-400 font-semibold">
               Custom Business Systems
@@ -117,7 +117,7 @@ export default function Navbar() {
           <div className="pt-2 border-t border-slate-800 flex items-center justify-between">
             <div>
               <span className="text-xs text-slate-400 block line-through">₹999</span>
-              <span className="text-base font-bold text-emerald-400">Today ₹249</span>
+              <span className="text-base font-bold text-emerald-400">Today ₹3</span>
             </div>
             <button
               onClick={() => scrollToSection('register')}

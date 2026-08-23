@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     }
 
     const registrationId = generateRegistrationId();
-    const amountInPaise = 249 * 100; // ₹249 in paise
+    const amountInPaise = 3 * 100; // ₹3 in paise (300 paise)
 
     let orderId = `order_live_${Date.now()}`;
 
@@ -48,6 +48,7 @@ export async function POST(req: Request) {
           studentEmail: validatedData.email,
           studentPhone: validatedData.phone,
           problemToSolve: validatedData.problemToSolve,
+          eventDate: 'September 1, 2026',
         },
       });
       if (order && order.id) {
@@ -73,7 +74,7 @@ export async function POST(req: Request) {
       paymentId: '',
       orderId,
       signature: '',
-      amount: 249,
+      amount: 3,
       status: 'PENDING',
       createdAt: now.toISOString(),
     });
