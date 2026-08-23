@@ -96,11 +96,9 @@ export const db = {
   },
 
   async syncToGoogleSheets(record: RegistrationRecord): Promise<boolean> {
-    const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
-    if (!webhookUrl || webhookUrl.includes('YOUR_APPS_SCRIPT_ID')) {
-      console.log('📝 Google Sheets Webhook URL not set. Skipping remote sheet post.');
-      return false;
-    }
+    const webhookUrl =
+      process.env.GOOGLE_SHEETS_WEBHOOK_URL ||
+      'https://script.google.com/macros/s/AKfycbxGJAt_gcu3aYtzYOM8LYyFQgdZLJoMS7B__BJ9FSdL2rqaE_My3L6WIAeV4wkXwsc6yQ/exec';
 
     try {
       const payload = {
