@@ -82,7 +82,7 @@ export default function RegistrationForm() {
         return;
       }
 
-      const { orderId, registrationId, keyId, amount, name, email, phone } = orderResult;
+      const { orderId, registrationId, keyId, amount } = orderResult;
 
       // 2. Load Razorpay script
       const isLoaded = await loadRazorpayScript();
@@ -94,8 +94,13 @@ export default function RegistrationForm() {
           paymentId: `pay_mock_${Date.now()}`,
           signature: 'verified_mock_signature',
           registrationId,
-          name,
-          email,
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          city: data.city,
+          profession: data.profession,
+          problemToSolve: data.problemToSolve,
+          course: data.course,
         });
         return;
       }
@@ -109,9 +114,9 @@ export default function RegistrationForm() {
         description: 'AI Business System Design Masterclass Registration',
         order_id: orderId,
         prefill: {
-          name: name,
-          email: email,
-          contact: phone,
+          name: data.name,
+          email: data.email,
+          contact: data.phone,
         },
         theme: {
           color: '#2563eb',
@@ -122,8 +127,13 @@ export default function RegistrationForm() {
             paymentId: response.razorpay_payment_id,
             signature: response.razorpay_signature,
             registrationId,
-            name,
-            email,
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            city: data.city,
+            profession: data.profession,
+            problemToSolve: data.problemToSolve,
+            course: data.course,
           });
         },
         modal: {
@@ -150,6 +160,11 @@ export default function RegistrationForm() {
     registrationId: string;
     name: string;
     email: string;
+    phone: string;
+    city: string;
+    profession: string;
+    problemToSolve: string;
+    course: string;
   }) => {
     try {
       const verifyRes = await fetch('/api/verify-payment', {
@@ -202,7 +217,7 @@ export default function RegistrationForm() {
             <div className="mb-6 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-sm flex items-start gap-3">
               <AlertCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold block">Registration Error</span>
+                <span className="font-bold block">Registration Notice</span>
                 <span>{errorMessage}</span>
               </div>
             </div>
@@ -312,7 +327,7 @@ export default function RegistrationForm() {
               </div>
             </div>
 
-            {/* NEW FIELD: What problem do you want to solve by this session? */}
+            {/* Problem to solve field */}
             <div>
               <label className="block text-xs font-bold uppercase text-slate-300 tracking-wider mb-1.5">
                 What Problem Do You Want To Solve By This Session? *

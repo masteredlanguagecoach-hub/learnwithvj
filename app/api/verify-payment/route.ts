@@ -1,12 +1,24 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/lib/db';
+import { db, RegistrationRecord } from '@/lib/db';
 import { sendConfirmationEmail } from '@/lib/mailer';
 import { verifyRazorpaySignature } from '@/lib/razorpay';
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { orderId, paymentId, signature, registrationId } = body;
+    const {
+      orderId,
+      paymentId,
+      signature,
+      registrationId,
+      name,
+      email,
+      phone,
+      city,
+      profession,
+      problemToSolve,
+      course,
+    } = body;
 
     if (!orderId || !paymentId || !registrationId) {
       return NextResponse.json(
@@ -38,23 +50,49 @@ export async function POST(req: Request) {
       );
     }
 
-    // Retrieve pending registration record
-    let record = db.findByOrderId(orderId) || db.getAll().find((r) => r.registrationId === registrationId);
+    // Retrieve pending registration record or reconstruct on the fly for stateless serverless containers
+    let record: RegistrationRecord | undefined =
+      db.findByOrderId(orderId) || db.getAll().find((r) => r.registrationId === registrationId);
+
+    const now = new Date();
 
     if (!record) {
-      return NextResponse.json(
-        { error: 'RECORD_NOT_FOUND', message: 'Associated registration record was not found' },
-        { status: 404 }
-      );
+      console.log(`ℹ️ Reconstructing registration record ${registrationId} on the fly for serverless execution...`);
+      record = {
+        registrationId: registrationId || `VEEJE-${Date.now()}`,
+        date: now.toISOString().slice(0, 10),
+        time: now.toLocaleTimeString('en-IN'),
+        name: name || 'Student',
+        email: email || '',
+        phone: phone || '',
+        city: city || '',
+        profession: profession || '',
+        problemToSolve: problemToSolve || '',
+        course: course || 'AI Business System Design Masterclass',
+        paymentId,
+        orderId,
+        signature: signature || 'verified_signature',
+        amount: 249,
+        status: 'SUCCESS',
+        createdAt: now.toISOString(),
+      };
+    } else {
+      record.status = 'SUCCESS';
+      record.paymentId = paymentId;
+      record.signature = signature || 'verified_signature';
     }
 
-    // Update status to SUCCESS
-    record.status = 'SUCCESS';
-    record.paymentId = paymentId;
-    record.signature = signature || 'verified_dev_signature';
+    // Save record to local store
     db.save(record);
 
-    // Send confirmation email via Nodemailer asynchronously
+    // EXPLICITLY AWAIT Google Sheets Webhook Sync so Vercel lambda does not terminate early
+    try {
+      await db.syncToGoogleSheets(record);
+    } catch (sheetErr: any) {
+      console.error('⚠️ Google Sheets sync notice:', sheetErr.message);
+    }
+
+    // Send confirmation email asynchronously
     sendConfirmationEmail({
       toEmail: record.email,
       studentName: record.name,
