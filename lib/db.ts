@@ -53,6 +53,33 @@ function persistStorage(): void {
 // Initial load
 loadStorage();
 
+function isTodayRecord(dateStr?: string, createdAtStr?: string): boolean {
+  const checkStr = (str?: string): boolean => {
+    if (!str) return false;
+    try {
+      const d = new Date(str);
+      if (!isNaN(d.getTime())) {
+        const today = new Date();
+        return (
+          d.getFullYear() === today.getFullYear() &&
+          d.getMonth() === today.getMonth() &&
+          d.getDate() === today.getDate()
+        );
+      }
+    } catch (e) {}
+
+    const now = new Date();
+    const todayISO = now.toISOString().slice(0, 10);
+    const monthShort = now.toLocaleString('en-US', { month: 'short' });
+    const dayNum = now.getDate();
+
+    const s = String(str);
+    return s.includes(todayISO) || (s.includes(monthShort) && s.includes(String(dayNum)));
+  };
+
+  return checkStr(dateStr) || checkStr(createdAtStr);
+}
+
 export const db = {
   getAll(): RegistrationRecord[] {
     return loadStorage();
@@ -158,11 +185,9 @@ export const db = {
     const successful = records.filter((r) => r.status === 'SUCCESS');
     const totalRevenue = successful.reduce((sum, r) => sum + (Number(r.amount) || 3), 0);
 
-    const todayStr = new Date().toISOString().slice(0, 10);
-    const todaySales = successful.filter((r) => r.date.startsWith(todayStr) || r.createdAt.startsWith(todayStr)).length;
-    const todayRevenue = successful
-      .filter((r) => r.date.startsWith(todayStr) || r.createdAt.startsWith(todayStr))
-      .reduce((sum, r) => sum + (Number(r.amount) || 3), 0);
+    const todayRecords = successful.filter((r) => isTodayRecord(r.date, r.createdAt));
+    const todaySales = todayRecords.length;
+    const todayRevenue = todayRecords.reduce((sum, r) => sum + (Number(r.amount) || 3), 0);
 
     const pendingCount = records.filter((r) => r.status === 'PENDING').length;
 
