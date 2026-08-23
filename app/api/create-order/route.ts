@@ -10,7 +10,7 @@ const registrationSchema = z.object({
   phone: z.string().min(10, 'Phone number must be at least 10 digits'),
   city: z.string().min(2, 'City is required'),
   profession: z.string().min(2, 'Profession is required'),
-  course: z.string().default('AI Business Intelligence Masterclass'),
+  course: z.string().default('AI Business System Design Masterclass'),
 });
 
 export async function POST(req: Request) {
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
     const registrationId = generateRegistrationId();
     const amountInPaise = 249 * 100; // ₹249 in paise
 
-    let orderId = `order_mock_${Date.now()}`;
+    let orderId = `order_live_${Date.now()}`;
 
     try {
       const razorpay = getRazorpayInstance();
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
         orderId = order.id;
       }
     } catch (razorpayError: any) {
-      console.warn('⚠️ Razorpay live API call notice (falling back to dev order mode):', razorpayError.message);
+      console.error('⚠️ Razorpay live API call notice:', razorpayError.message);
     }
 
     const now = new Date();
@@ -75,7 +75,7 @@ export async function POST(req: Request) {
       createdAt: now.toISOString(),
     });
 
-    const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_veeje_ai_bi';
+    const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_live_TTCDG5XNdaQZY9';
 
     return NextResponse.json({
       success: true,

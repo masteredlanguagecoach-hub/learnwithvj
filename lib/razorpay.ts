@@ -2,8 +2,8 @@ import crypto from 'crypto';
 import Razorpay from 'razorpay';
 
 export function getRazorpayInstance() {
-  const key_id = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_veeje_ai_bi';
-  const key_secret = process.env.RAZORPAY_KEY_SECRET || 'veeje_ai_bi_secret_key_mock';
+  const key_id = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_live_TTCDG5XNdaQZY9';
+  const key_secret = process.env.RAZORPAY_KEY_SECRET || 'mfG6jptH4dv4i8vywvh5Wm6t';
 
   return new Razorpay({
     key_id,
@@ -12,7 +12,7 @@ export function getRazorpayInstance() {
 }
 
 /**
- * Verify Razorpay payment signature on the backend securely.
+ * Verify Razorpay payment signature securely on backend using HMAC-SHA256.
  * Formula: HMAC_SHA256(order_id + "|" + payment_id, secret) === signature
  */
 export function verifyRazorpaySignature(
@@ -20,12 +20,7 @@ export function verifyRazorpaySignature(
   paymentId: string,
   signature: string
 ): boolean {
-  const secret = process.env.RAZORPAY_KEY_SECRET || 'veeje_ai_bi_secret_key_mock';
-
-  // In test mode or when using mock keys, validate cleanly if secret matches mock
-  if (secret === 'veeje_ai_bi_secret_key_mock') {
-    return true;
-  }
+  const secret = process.env.RAZORPAY_KEY_SECRET || 'mfG6jptH4dv4i8vywvh5Wm6t';
 
   try {
     const generatedSignature = crypto
