@@ -8,7 +8,7 @@
  * 5. Select type: 'Web app'.
  * 6. Set "Execute as": "Me".
  * 7. Set "Who has access": "Anyone" (crucial so webhook can post without CORS issue).
- * 8. Copy Web App URL and set as GOOGLE_SHEETS_WEBHOOK_URL in .env.local!
+ * 8. Copy Web App URL and set as GOOGLE_SHEETS_WEBHOOK_URL in environment!
  */
 
 function doPost(e) {
@@ -27,6 +27,7 @@ function doPost(e) {
         'Phone',
         'City',
         'Profession',
+        'Problem to Solve',
         'Course',
         'Payment ID',
         'Order ID',
@@ -51,7 +52,8 @@ function doPost(e) {
       data['Phone'] || '',
       data['City'] || '',
       data['Profession'] || '',
-      data['Course'] || 'AI Business Intelligence Masterclass',
+      data['Problem to Solve'] || '',
+      data['Course'] || 'AI Business System Design Masterclass',
       data['Payment ID'] || '',
       data['Order ID'] || '',
       data['Signature'] || '',

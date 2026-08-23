@@ -13,8 +13,6 @@ import {
   CheckCircle2,
   AlertCircle,
   LogOut,
-  ShieldCheck,
-  FileSpreadsheet,
 } from 'lucide-react';
 import { formatINR } from '@/lib/utils';
 
@@ -269,7 +267,7 @@ export default function AdminDashboard() {
               <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Search name, email, phone..."
+                placeholder="Search name, email, problem..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-blue-500"
@@ -317,6 +315,7 @@ export default function AdminDashboard() {
                   <th className="p-4">Phone</th>
                   <th className="p-4">City</th>
                   <th className="p-4">Profession</th>
+                  <th className="p-4">Problem To Solve</th>
                   <th className="p-4">Payment ID</th>
                   <th className="p-4">Amount</th>
                   <th className="p-4">Status</th>
@@ -325,7 +324,7 @@ export default function AdminDashboard() {
               <tbody className="divide-y divide-slate-800/60 bg-slate-950/60">
                 {registrations.length === 0 ? (
                   <tr>
-                    <td colSpan={10} className="p-8 text-center text-slate-500">
+                    <td colSpan={11} className="p-8 text-center text-slate-500">
                       No registration records found.
                     </td>
                   </tr>
@@ -341,6 +340,9 @@ export default function AdminDashboard() {
                       <td className="p-4 font-mono">{reg.phone}</td>
                       <td className="p-4">{reg.city}</td>
                       <td className="p-4">{reg.profession}</td>
+                      <td className="p-4 max-w-xs truncate text-amber-300" title={reg.problemToSolve}>
+                        {reg.problemToSolve || '—'}
+                      </td>
                       <td className="p-4 font-mono text-slate-400">{reg.paymentId || '—'}</td>
                       <td className="p-4 font-bold text-emerald-400">₹{reg.amount}</td>
                       <td className="p-4">

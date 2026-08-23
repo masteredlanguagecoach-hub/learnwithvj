@@ -10,6 +10,7 @@ const registrationSchema = z.object({
   phone: z.string().min(10, 'Phone number must be at least 10 digits'),
   city: z.string().min(2, 'City is required'),
   profession: z.string().min(2, 'Profession is required'),
+  problemToSolve: z.string().min(3, 'Please describe what problem you want to solve'),
   course: z.string().default('AI Business System Design Masterclass'),
 });
 
@@ -46,6 +47,7 @@ export async function POST(req: Request) {
           studentName: validatedData.name,
           studentEmail: validatedData.email,
           studentPhone: validatedData.phone,
+          problemToSolve: validatedData.problemToSolve,
         },
       });
       if (order && order.id) {
@@ -66,6 +68,7 @@ export async function POST(req: Request) {
       phone: validatedData.phone,
       city: validatedData.city,
       profession: validatedData.profession,
+      problemToSolve: validatedData.problemToSolve,
       course: validatedData.course,
       paymentId: '',
       orderId,

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
-import { ShieldCheck, Lock, Loader2, AlertCircle, User, Mail, Phone, MapPin, Briefcase } from 'lucide-react';
+import { ShieldCheck, Lock, Loader2, AlertCircle, User, Mail, Phone, MapPin, Briefcase, HelpCircle } from 'lucide-react';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Please enter your full name'),
@@ -16,6 +16,7 @@ const formSchema = z.object({
     .regex(/^[0-9+\s-]{10,15}$/, 'Invalid phone number format'),
   city: z.string().min(2, 'Please enter your city'),
   profession: z.string().min(2, 'Please select or enter your profession'),
+  problemToSolve: z.string().min(3, 'Please describe what problem you want to solve'),
   course: z.string().default('AI Business System Design Masterclass'),
 });
 
@@ -309,6 +310,23 @@ export default function RegistrationForm() {
                 </div>
                 {errors.profession && <p className="mt-1 text-xs text-rose-400">{errors.profession.message}</p>}
               </div>
+            </div>
+
+            {/* NEW FIELD: What problem do you want to solve by this session? */}
+            <div>
+              <label className="block text-xs font-bold uppercase text-slate-300 tracking-wider mb-1.5">
+                What Problem Do You Want To Solve By This Session? *
+              </label>
+              <div className="relative">
+                <HelpCircle className="w-5 h-5 text-slate-500 absolute left-3.5 top-4" />
+                <textarea
+                  rows={3}
+                  placeholder="e.g. I want to build an automated attendance & payroll system for my 20 employees / build a CRM dashboard..."
+                  {...register('problemToSolve')}
+                  className="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm font-medium transition-all"
+                />
+              </div>
+              {errors.problemToSolve && <p className="mt-1 text-xs text-rose-400">{errors.problemToSolve.message}</p>}
             </div>
 
             {/* Price & Submit CTA Box */}

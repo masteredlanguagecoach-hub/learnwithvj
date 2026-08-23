@@ -10,6 +10,7 @@ export interface RegistrationRecord {
   phone: string;
   city: string;
   profession: string;
+  problemToSolve: string;
   course: string;
   paymentId: string;
   orderId: string;
@@ -111,6 +112,7 @@ export const db = {
         'Phone': record.phone,
         'City': record.city,
         'Profession': record.profession,
+        'Problem to Solve': record.problemToSolve || '',
         'Course': record.course,
         'Payment ID': record.paymentId,
         'Order ID': record.orderId,

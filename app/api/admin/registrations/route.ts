@@ -19,7 +19,8 @@ export async function GET(req: Request) {
           r.email.toLowerCase().includes(search) ||
           r.phone.includes(search) ||
           r.registrationId.toLowerCase().includes(search) ||
-          r.city.toLowerCase().includes(search)
+          r.city.toLowerCase().includes(search) ||
+          (r.problemToSolve && r.problemToSolve.toLowerCase().includes(search))
       );
     }
 
@@ -42,6 +43,7 @@ export async function GET(req: Request) {
         'Phone',
         'City',
         'Profession',
+        'Problem to Solve',
         'Course',
         'Payment ID',
         'Order ID',
@@ -61,6 +63,7 @@ export async function GET(req: Request) {
           `"${r.phone}"`,
           `"${r.city.replace(/"/g, '""')}"`,
           `"${r.profession.replace(/"/g, '""')}"`,
+          `"${(r.problemToSolve || '').replace(/"/g, '""')}"`,
           `"${r.course}"`,
           `"${r.paymentId}"`,
           `"${r.orderId}"`,
