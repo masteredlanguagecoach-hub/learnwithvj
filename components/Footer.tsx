@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, MessageSquare, ShieldCheck, Heart } from 'lucide-react';
+import Link from 'next/link';
+import { Sparkles, MessageSquare } from 'lucide-react';
 
 export default function Footer() {
   const whatsappUrl = 'https://wa.me/916282548226?text=Hi%20Veeje,%20I%20have%20a%20question%20about%20the%20Masterclass.';
@@ -24,12 +25,12 @@ export default function Footer() {
             </div>
 
             <p className="text-slate-400 text-sm max-w-sm">
-              Empowering business owners, professionals, and students to master Google Sheets, Business Intelligence dashboards, and AI automation.
+              Empowering business owners, professionals, and students to design complete business systems, Google Sheets databases, and Web Apps with AI.
             </p>
 
             <div className="pt-2 flex items-center gap-2 text-xs text-slate-400 font-mono">
               <span>Tagline:</span>
-              <span className="text-sky-400 font-bold">Analyze. Visualize. Automate.</span>
+              <span className="text-sky-400 font-bold">Design • Build • Automate • Deploy</span>
             </div>
           </div>
 
@@ -38,19 +39,19 @@ export default function Footer() {
             <h4 className="text-white font-bold mb-4 text-sm tracking-wider uppercase">Quick Links</h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <a href="#why-learn" className="hover:text-white transition-colors">Why Learn BI</a>
+                <a href="/#why-learn" className="hover:text-white transition-colors">Why Learn BI</a>
               </li>
               <li>
-                <a href="#curriculum" className="hover:text-white transition-colors">Workshop Curriculum</a>
+                <a href="/#curriculum" className="hover:text-white transition-colors">Workshop Curriculum</a>
               </li>
               <li>
-                <a href="#dashboards" className="hover:text-white transition-colors">Business Dashboards</a>
+                <a href="/#dashboards" className="hover:text-white transition-colors">Business Systems</a>
               </li>
               <li>
-                <a href="#custom-systems" className="hover:text-amber-300 font-semibold transition-colors">Custom Business Systems</a>
+                <a href="/#custom-systems" className="hover:text-amber-300 font-semibold transition-colors">Custom Business Systems</a>
               </li>
               <li>
-                <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
+                <a href="/#faq" className="hover:text-white transition-colors">FAQ</a>
               </li>
             </ul>
           </div>
@@ -80,9 +81,9 @@ export default function Footer() {
         <div className="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
           <p>© {new Date().getFullYear()} Learn with Veeje. All rights reserved.</p>
           <div className="flex items-center space-x-6">
-            <a href="#" className="hover:text-slate-200 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-slate-200 transition-colors">Terms of Service</a>
-            <a href="/admin" className="hover:text-sky-400 transition-colors">Admin Login</a>
+            <Link href="/privacy" className="hover:text-slate-200 transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-slate-200 transition-colors">Terms of Service</Link>
+            <Link href="/admin" className="hover:text-sky-400 transition-colors">Admin Login</Link>
           </div>
         </div>
 
