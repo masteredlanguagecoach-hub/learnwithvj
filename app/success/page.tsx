@@ -9,13 +9,13 @@ function SuccessContent() {
   const searchParams = useSearchParams();
 
   const studentName = searchParams.get('name') || 'Valued Student';
-  const courseName = searchParams.get('course') || 'AI Business Intelligence Masterclass';
+  const courseName = searchParams.get('course') || 'AI Business System Design Masterclass';
   const paymentId = searchParams.get('payment_id') || 'pay_verified_veeje';
-  const amountPaid = searchParams.get('amount') || '249';
+  const amountPaid = searchParams.get('amount') || '3';
   const registrationId = searchParams.get('reg_id') || 'VEEJE-SUCCESS';
 
   const whatsappGroupLink =
-    process.env.NEXT_PUBLIC_WHATSAPP_GROUP_LINK || 'https://chat.whatsapp.com/EXAMPLE_VEEJE_AI_BI_GROUP';
+    process.env.NEXT_PUBLIC_WHATSAPP_GROUP_LINK || 'https://chat.whatsapp.com/H5MZSMLnKy07SlM5EGWOnc';
 
   useEffect(() => {
     // Trigger celebratory confetti animation on load

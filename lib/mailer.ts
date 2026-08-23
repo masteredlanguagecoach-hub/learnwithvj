@@ -12,7 +12,8 @@ export interface SendEmailOptions {
 export async function sendConfirmationEmail(options: SendEmailOptions) {
   const { toEmail, studentName, courseName, amountPaid, paymentId, registrationId } = options;
 
-  const whatsappLink = process.env.NEXT_PUBLIC_WHATSAPP_GROUP_LINK || 'https://chat.whatsapp.com/EXAMPLE_VEEJE_AI_BI_GROUP';
+  const whatsappLink =
+    process.env.NEXT_PUBLIC_WHATSAPP_GROUP_LINK || 'https://chat.whatsapp.com/H5MZSMLnKy07SlM5EGWOnc';
   const gmailUser = process.env.GMAIL_USER;
   const gmailPass = process.env.GMAIL_APP_PASSWORD;
 
@@ -45,14 +46,14 @@ export async function sendConfirmationEmail(options: SendEmailOptions) {
     <div class="container">
       <div class="header">
         <h1>Learn with Veeje</h1>
-        <p>AI Business Intelligence Masterclass</p>
+        <p>AI Business System Design Masterclass</p>
       </div>
       <div class="content">
         <div class="greeting">Hi ${studentName}, 🎉</div>
         <div class="badge">✓ Registration Confirmed</div>
         
         <p style="line-height: 1.6; color: #334155;">
-          Congratulations! Your seat for the <strong>AI Business Intelligence Masterclass</strong> has been successfully locked. We are excited to help you transform raw data into powerful dashboards & AI automations.
+          Congratulations! Your seat for the <strong>AI Business System Design Masterclass</strong> has been successfully locked. We are excited to help you transform raw data into powerful dashboards & AI automations.
         </p>
 
         <div class="details-card">
@@ -74,7 +75,7 @@ export async function sendConfirmationEmail(options: SendEmailOptions) {
           </div>
           <div class="detail-row">
             <span class="detail-label">Duration</span>
-            <span class="detail-value">2 Hours (Live Online)</span>
+            <span class="detail-value">2 Hours 30 Minutes (Live Online)</span>
           </div>
         </div>
 
@@ -94,7 +95,7 @@ export async function sendConfirmationEmail(options: SendEmailOptions) {
       </div>
       <div class="footer">
         © ${new Date().getFullYear()} Learn with Veeje. All rights reserved. <br/>
-        Analyze. Visualize. Automate.
+        Design • Build • Automate • Deploy
       </div>
     </div>
   </body>
