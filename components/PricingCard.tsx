@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, CheckCircle2, ShieldCheck, ArrowRight, Clock, Zap } from 'lucide-react';
+import { Sparkles, CheckCircle2, ShieldCheck, ArrowRight, Clock } from 'lucide-react';
 
 export default function PricingCard() {
   const [timeLeft, setTimeLeft] = useState({ minutes: 14, seconds: 59 });
@@ -53,10 +53,10 @@ export default function PricingCard() {
           </span>
 
           <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
-            AI Business Intelligence Masterclass
+            AI Business System Design Masterclass
           </h3>
           <p className="text-slate-400 text-sm max-w-xl mx-auto mb-8">
-            Complete 2-Hour Live Workshop + 9 Ready-to-Use Business Dashboard Templates & AI Automation Scripts.
+            Complete 2 Hours 30 Minutes Live Masterclass + 10 Business Web App & Sheets System Templates.
           </p>
 
           {/* Pricing Numbers Box */}
@@ -78,15 +78,19 @@ export default function PricingCard() {
           <div className="max-w-lg mx-auto text-left space-y-3 mb-8 text-sm text-slate-300">
             <div className="flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-              <span><strong>2 Hours Live Google Meet Masterclass</strong> with Veeje</span>
+              <span><strong>2 Hours 30 Minutes Live Masterclass</strong> with Veeje</span>
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-              <span><strong>9 Pre-built Business Dashboard Templates</strong> (Sales, HR, Finance, CRM, etc.)</span>
+              <span><strong>Complete 9-Module Business System Design Roadmap</strong></span>
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-              <span><strong>ChatGPT & Apps Script Prompt Guide</strong> for instant formulas & code</span>
+              <span><strong>10 Business System Templates & Web App Connections</strong></span>
+            </div>
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+              <span><strong>ChatGPT & Apps Script Prompt Engineering Guide</strong></span>
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
@@ -94,7 +98,7 @@ export default function PricingCard() {
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-              <span><strong>Certificate of Completion</strong> & Q&A session</span>
+              <span><strong>Certificate of Completion</strong> & live system deployment Q&A</span>
             </div>
           </div>
 

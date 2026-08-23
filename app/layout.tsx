@@ -9,24 +9,24 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'AI Business Intelligence Masterclass | Learn with Veeje',
+  title: 'AI Business System Design Masterclass | Learn with Veeje',
   description:
-    'Master Advanced Google Sheets, Business Dashboards & AI Automation. Learn how to analyze business data, build executive dashboards, and automate workflows with AI. Live 2-Hour Online Workshop for ₹249.',
+    'Design • Build • Automate • Deploy. Learn how to convert business ideas into complete business systems using AI, Google Sheets and Web Apps without traditional programming. Live 2 Hours 30 Minutes Workshop for ₹249.',
   keywords: [
-    'Google Sheets Masterclass',
-    'AI Business Intelligence',
-    'Veeje Google Sheets',
-    'Business Dashboards',
-    'Apps Script Automation',
-    'ChatGPT Google Sheets',
-    'Data Analytics Workshop',
+    'AI Business System Design',
     'Learn with Veeje',
+    'Google Sheets Database',
+    'Business Web Apps',
+    'Apps Script Automation',
+    'No Code Systems',
+    'Business Process Analysis',
+    'Veeje Masterclass',
   ],
   authors: [{ name: 'Veeje' }],
   openGraph: {
-    title: 'AI Business Intelligence Masterclass - Learn with Veeje',
+    title: 'AI Business System Design Masterclass - Learn with Veeje',
     description:
-      'Analyze. Visualize. Automate. Master Advanced Google Sheets, Business Dashboards & AI Automation in a live 2-Hour Workshop for ₹249.',
+      'Design • Build • Automate • Deploy. Learn how to design complete business systems, build databases in Google Sheets, connect them to web applications and use AI to automate development. Live Workshop for ₹249.',
     url: 'https://learnwithveeje.com',
     siteName: 'Learn with Veeje',
     locale: 'en_IN',
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Business Intelligence Masterclass | Learn with Veeje',
+    title: 'AI Business System Design Masterclass | Learn with Veeje',
     description:
-      'Master Advanced Google Sheets, Business Dashboards & AI Automation. Live 2-Hour Workshop for ₹249.',
+      'Design • Build • Automate • Deploy. Learn how to convert business ideas into complete business systems. Live Workshop for ₹249.',
   },
   robots: {
     index: true,
@@ -52,9 +52,9 @@ export default function RootLayout({
   const jsonLdCourse = {
     '@context': 'https://schema.org',
     '@type': 'Course',
-    name: 'AI Business Intelligence Masterclass',
+    name: 'AI Business System Design Masterclass',
     description:
-      'Learn how to analyze business data, build professional dashboards, automate repetitive work and use AI with Google Sheets to improve business decision making.',
+      'Learn how to convert business ideas into complete business systems using AI, Google Sheets and Web Apps without traditional programming.',
     provider: {
       '@type': 'Organization',
       name: 'Learn with Veeje',

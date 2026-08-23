@@ -3,104 +3,136 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
+  Workflow,
+  Search,
+  Layers,
+  Database,
   FileSpreadsheet,
-  Sparkles,
   BarChart,
-  PieChart,
-  Table,
-  Gauge,
-  TrendingUp,
-  Users,
-  DollarSign,
-  Bot,
-  Code2,
+  Sparkles,
+  Cpu,
   Zap,
+  Globe,
+  Link2,
+  Eye,
+  PlusCircle,
+  RefreshCw,
+  SearchCheck,
+  Rocket,
 } from 'lucide-react';
 
 const learningTopics = [
   {
-    icon: FileSpreadsheet,
-    title: 'Advanced Google Sheets',
-    description: 'Master powerful functions, array formulas, FILTER, QUERY & nested logical functions.',
-    badge: 'Core Sheet Skill',
+    icon: Workflow,
+    title: 'Business System Design',
+    description: 'Learn the architectural blueprint of converting business ideas into digital systems.',
+    badge: 'System Blueprint',
     color: 'from-blue-500/20 to-sky-500/20 border-blue-500/30 text-sky-400',
   },
   {
-    icon: Sparkles,
-    title: 'Data Cleaning',
-    description: 'Effortlessly clean dirty datasets, remove duplicates, trim spaces & split column text.',
-    badge: 'Data Hygiene',
+    icon: Search,
+    title: 'Business Process Analysis',
+    description: 'Analyze real business problems, user roles, inputs, outputs & reports before building.',
+    badge: 'Process BI',
+    color: 'from-indigo-500/20 to-violet-500/20 border-indigo-500/30 text-indigo-400',
+  },
+  {
+    icon: Layers,
+    title: 'System Logic Creation',
+    description: 'Design complete business workflows, user flows, decision logic & error handling.',
+    badge: 'Workflow Logic',
+    color: 'from-violet-500/20 to-purple-500/20 border-violet-500/30 text-violet-300',
+  },
+  {
+    icon: Database,
+    title: 'Database Design',
+    description: 'Structure master data, transaction data, tables, fields & entity relationships cleanly.',
+    badge: 'Data Architecture',
     color: 'from-emerald-500/20 to-teal-500/20 border-emerald-500/30 text-emerald-400',
+  },
+  {
+    icon: FileSpreadsheet,
+    title: 'Advanced Google Sheets',
+    description: 'Master QUERY, FILTER, XLOOKUP, SUMIFS, COUNTIFS & dynamic data validation.',
+    badge: 'Sheet Database',
+    color: 'from-emerald-500/20 to-green-500/20 border-emerald-500/30 text-emerald-300',
   },
   {
     icon: BarChart,
     title: 'Business Dashboards',
-    description: 'Design executive visual dashboards that provide high-level decision insights instantly.',
+    description: 'Design dynamic visual KPI scorecards and executive decision-making dashboards.',
     badge: 'Visual BI',
-    color: 'from-indigo-500/20 to-violet-500/20 border-indigo-500/30 text-indigo-400',
-  },
-  {
-    icon: PieChart,
-    title: 'Dynamic Charts',
-    description: 'Create interactive bar, combo, waterfall, donut & trendline chart visualizations.',
-    badge: 'Data Viz',
-    color: 'from-purple-500/20 to-pink-500/20 border-purple-500/30 text-purple-400',
-  },
-  {
-    icon: Table,
-    title: 'Pivot Tables',
-    description: 'Summarize thousands of rows of data into multi-dimensional breakdown reports.',
-    badge: 'Fast Analysis',
-    color: 'from-amber-500/20 to-orange-500/20 border-amber-500/30 text-amber-400',
-  },
-  {
-    icon: Gauge,
-    title: 'KPI Dashboard',
-    description: 'Track key performance indicators, targets vs actuals & growth variances in real-time.',
-    badge: 'Executive Level',
-    color: 'from-cyan-500/20 to-blue-500/20 border-cyan-500/30 text-cyan-400',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Sales Reports',
-    description: 'Build revenue trackers, product breakdown matrices & salesperson performance scorecards.',
-    badge: 'Revenue Track',
-    color: 'from-emerald-500/20 to-green-500/20 border-emerald-500/30 text-emerald-400',
-  },
-  {
-    icon: Users,
-    title: 'HR & Attendance Reports',
-    description: 'Automate attendance logs, employee leave tracking & monthly headcount metrics.',
-    badge: 'People Ops',
-    color: 'from-rose-500/20 to-pink-500/20 border-rose-500/30 text-rose-400',
-  },
-  {
-    icon: DollarSign,
-    title: 'Finance Reports',
-    description: 'Create income vs expense monitors, profit margin calculators & cashflow overviews.',
-    badge: 'Financial Intelligence',
-    color: 'from-amber-500/20 to-yellow-500/20 border-amber-500/30 text-amber-400',
-  },
-  {
-    icon: Bot,
-    title: 'AI Formula Generation',
-    description: 'Use ChatGPT & Gemini AI prompts to write complex formulas without memorizing syntax.',
-    badge: 'AI Powered',
-    color: 'from-violet-500/20 to-indigo-500/20 border-violet-500/30 text-violet-300',
-  },
-  {
-    icon: Code2,
-    title: 'Apps Script with AI',
-    description: 'Generate Google Apps Script automation code using simple plain English AI prompts.',
-    badge: 'No Code AI Scripting',
     color: 'from-sky-500/20 to-blue-500/20 border-sky-500/30 text-sky-300',
   },
   {
+    icon: Sparkles,
+    title: 'AI Prompt Engineering',
+    description: 'Write effective AI prompts to generate formulas, scripts & backend logic effortlessly.',
+    badge: 'AI Mastery',
+    color: 'from-amber-500/20 to-orange-500/20 border-amber-500/30 text-amber-400',
+  },
+  {
+    icon: Cpu,
+    title: 'AI Development',
+    description: 'Use AI tools to write Apps Script backend code, debug errors & refine outputs.',
+    badge: 'No-Code AI',
+    color: 'from-purple-500/20 to-pink-500/20 border-purple-500/30 text-purple-400',
+  },
+  {
     icon: Zap,
-    title: 'Business Automation',
-    description: 'Trigger automated email reports, PDF generation & multi-sheet data synchronization.',
+    title: 'Google Sheets Automation',
+    description: 'Automate repetitive workflows, email notifications & data synchronization triggers.',
     badge: 'Auto Workflows',
-    color: 'from-emerald-500/20 to-teal-500/20 border-emerald-500/30 text-emerald-300',
+    color: 'from-teal-500/20 to-emerald-500/20 border-teal-500/30 text-teal-300',
+  },
+  {
+    icon: Globe,
+    title: 'Build Business Web Apps',
+    description: 'Turn static Google Sheets into real, interactive, responsive web applications.',
+    badge: 'Web App Dev',
+    color: 'from-cyan-500/20 to-blue-500/20 border-cyan-500/30 text-cyan-400',
+  },
+  {
+    icon: Link2,
+    title: 'Connect Web Apps to Sheets',
+    description: 'Establish live 2-way API connections between your web app frontend and Google Sheets.',
+    badge: 'API Connection',
+    color: 'from-blue-500/20 to-indigo-500/20 border-blue-500/30 text-blue-300',
+  },
+  {
+    icon: Eye,
+    title: 'Display Live Data',
+    description: 'Fetch and display real-time Google Sheets records dynamically inside your web app.',
+    badge: 'Real-time UI',
+    color: 'from-sky-500/20 to-cyan-500/20 border-sky-500/30 text-sky-400',
+  },
+  {
+    icon: PlusCircle,
+    title: 'Add New Records',
+    description: 'Build web forms that capture user input and automatically insert rows into Sheets.',
+    badge: 'Data Entry',
+    color: 'from-emerald-500/20 to-lime-500/20 border-emerald-500/30 text-emerald-400',
+  },
+  {
+    icon: RefreshCw,
+    title: 'Update Existing Data',
+    description: 'Allow web app users to search, edit, and update existing database rows seamlessly.',
+    badge: 'CRUD Logic',
+    color: 'from-indigo-500/20 to-violet-500/20 border-indigo-500/30 text-indigo-300',
+  },
+  {
+    icon: SearchCheck,
+    title: 'Search & Filter Data',
+    description: 'Implement instant multi-parameter search and filtering across thousands of records.',
+    badge: 'Fast Search',
+    color: 'from-rose-500/20 to-pink-500/20 border-rose-500/30 text-rose-300',
+  },
+  {
+    icon: Rocket,
+    title: 'Deploy Web Applications',
+    description: 'Publish, host, and share private or public business web applications globally.',
+    badge: 'Live Deployment',
+    color: 'from-amber-500/20 to-yellow-500/20 border-amber-500/30 text-amber-300',
   },
 ];
 
@@ -112,17 +144,17 @@ export default function LearningCards() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-full border border-emerald-500/20 inline-block">
-            Curriculum Highlights
+            Curriculum Breakdown
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
             What You Will Learn
           </h2>
           <p className="text-slate-300 text-base sm:text-lg">
-            12 essential skills designed to transform you from a spreadsheet beginner into a confident Business Intelligence specialist.
+            16 comprehensive skill modules designed to transform you from a non-programmer into a complete Business System Developer.
           </p>
         </div>
 
-        {/* 12 Cards Grid */}
+        {/* 16 Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {learningTopics.map((topic, idx) => {
             const IconComponent = topic.icon;
@@ -132,7 +164,7 @@ export default function LearningCards() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                transition={{ duration: 0.4, delay: idx * 0.04 }}
                 className="bg-slate-950/80 border border-slate-800 rounded-3xl p-6 hover:border-slate-700 transition-all duration-300 hover:-translate-y-1.5 shadow-lg group flex flex-col justify-between"
               >
                 <div>

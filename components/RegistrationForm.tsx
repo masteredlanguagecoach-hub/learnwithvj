@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
-import { ShieldCheck, Lock, Sparkles, Loader2, AlertCircle, CheckCircle2, User, Mail, Phone, MapPin, Briefcase } from 'lucide-react';
+import { ShieldCheck, Lock, Loader2, AlertCircle, User, Mail, Phone, MapPin, Briefcase } from 'lucide-react';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Please enter your full name'),
@@ -16,7 +16,7 @@ const formSchema = z.object({
     .regex(/^[0-9+\s-]{10,15}$/, 'Invalid phone number format'),
   city: z.string().min(2, 'Please enter your city'),
   profession: z.string().min(2, 'Please select or enter your profession'),
-  course: z.string().default('AI Business Intelligence Masterclass'),
+  course: z.string().default('AI Business System Design Masterclass'),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -39,7 +39,7 @@ export default function RegistrationForm() {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      course: 'AI Business Intelligence Masterclass',
+      course: 'AI Business System Design Masterclass',
     },
   });
 
@@ -88,7 +88,6 @@ export default function RegistrationForm() {
 
       if (!isLoaded || keyId === 'rzp_test_veeje_ai_bi') {
         console.warn('⚠️ Razorpay Live script unavailable or in Dev Mock mode. Directing to instant verified payment completion...');
-        // Simulate backend verification directly for test / dev environment
         await handlePaymentVerification({
           orderId,
           paymentId: `pay_mock_${Date.now()}`,
@@ -106,7 +105,7 @@ export default function RegistrationForm() {
         amount: amount,
         currency: 'INR',
         name: 'Learn with Veeje',
-        description: 'AI Business Intelligence Masterclass Registration',
+        description: 'AI Business System Design Masterclass Registration',
         order_id: orderId,
         prefill: {
           name: name,
@@ -161,7 +160,6 @@ export default function RegistrationForm() {
       const verifyData = await verifyRes.json();
 
       if (verifyRes.ok && verifyData.success) {
-        // Redirect to Success Page with verified student query parameters
         router.push(
           `/success?name=${encodeURIComponent(verifyData.studentName)}&course=${encodeURIComponent(
             verifyData.courseName
@@ -318,7 +316,7 @@ export default function RegistrationForm() {
               <div className="flex items-center justify-between mb-4 bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
                 <div>
                   <span className="text-xs text-slate-400 block font-medium">Total Payable Amount</span>
-                  <span className="text-xs text-emerald-400 font-bold">Includes Workshop + Templates</span>
+                  <span className="text-xs text-emerald-400 font-bold">Includes Masterclass + Web App Templates</span>
                 </div>
                 <div className="text-right">
                   <span className="text-xs text-slate-500 line-through mr-2">₹999</span>

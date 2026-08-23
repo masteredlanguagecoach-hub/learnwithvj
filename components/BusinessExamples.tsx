@@ -3,81 +3,89 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  TrendingUp,
+  GraduationCap,
+  UserCheck,
+  Users,
   Clock,
   DollarSign,
-  Users,
-  PieChart,
   Boxes,
-  UserCheck,
-  GraduationCap,
-  Megaphone,
+  TrendingUp,
+  PieChart,
+  UserPlus,
+  Target,
   Sparkles,
 } from 'lucide-react';
 
 const dashboards = [
   {
-    title: 'Sales Dashboard',
-    desc: 'Revenue trends, target vs achievement, top performing products & regional sales heatmaps.',
-    icon: TrendingUp,
+    title: 'Student Management System',
+    desc: 'Complete student enrollment, fee tracking, attendance records & automated progress report generation.',
+    icon: GraduationCap,
     color: 'from-blue-500/20 to-sky-500/20 text-sky-400 border-sky-500/30',
-    metric: '₹45L+ Tracked',
+    metric: 'Edu Web App',
   },
   {
-    title: 'Attendance Dashboard',
-    desc: 'Daily check-in logs, late entry tracking, leave balances & monthly attendance percentages.',
+    title: 'CRM System',
+    desc: 'Lead tracking pipeline, deal stages, customer follow-up schedules & sales team activity logs.',
+    icon: UserCheck,
+    color: 'from-indigo-500/20 to-violet-500/20 text-indigo-400 border-indigo-500/30',
+    metric: 'Customer BI',
+  },
+  {
+    title: 'HRMS Software',
+    desc: 'Employee master data, onboarding workflows, leave requests & performance scorecards.',
+    icon: Users,
+    color: 'from-purple-500/20 to-pink-500/20 text-purple-400 border-purple-500/30',
+    metric: 'People Ops',
+  },
+  {
+    title: 'Attendance System',
+    desc: 'Daily clock-in/clock-out logs, late entry tracking, leave balances & monthly attendance summaries.',
     icon: Clock,
     color: 'from-emerald-500/20 to-teal-500/20 text-emerald-400 border-emerald-500/30',
     metric: '98% Accuracy',
   },
   {
-    title: 'Payroll Dashboard',
-    desc: 'Salary breakdown, overtime calculations, tax deductions & automated payslip generation.',
+    title: 'Payroll System',
+    desc: 'Automated salary breakdown, overtime calculations, tax deductions & digital payslip generation.',
     icon: DollarSign,
     color: 'from-amber-500/20 to-yellow-500/20 text-amber-400 border-amber-500/30',
     metric: 'Instant Payslips',
   },
   {
-    title: 'HR Dashboard',
-    desc: 'Headcount metrics, employee turnover rate, hiring pipeline & performance evaluations.',
-    icon: Users,
-    color: 'from-indigo-500/20 to-purple-500/20 text-indigo-400 border-indigo-500/30',
-    metric: 'Full People BI',
+    title: 'Inventory Management',
+    desc: 'Stock level tracking, reorder alert thresholds, supplier records & fast-moving item analytics.',
+    icon: Boxes,
+    color: 'from-cyan-500/20 to-blue-500/20 text-cyan-400 border-cyan-500/30',
+    metric: 'Stock Control',
+  },
+  {
+    title: 'Sales Dashboard',
+    desc: 'Revenue trends, sales representative performance, target vs actuals & product breakdown charts.',
+    icon: TrendingUp,
+    color: 'from-emerald-500/20 to-green-500/20 text-emerald-300 border-emerald-500/30',
+    metric: 'Revenue BI',
   },
   {
     title: 'Finance Dashboard',
-    desc: 'Income vs expense tracking, profit margins, cashflow forecasts & budget variance alerts.',
+    desc: 'Income vs expense monitors, profit margins, cashflow forecasts & monthly budget variance alerts.',
     icon: PieChart,
     color: 'from-violet-500/20 to-pink-500/20 text-violet-400 border-violet-500/30',
-    metric: 'Real-time Profit',
+    metric: 'Real-Time Profit',
   },
   {
-    title: 'Inventory Dashboard',
-    desc: 'Stock level alerts, reorder thresholds, fast-moving items & supplier lead times.',
-    icon: Boxes,
-    color: 'from-cyan-500/20 to-blue-500/20 text-cyan-400 border-cyan-500/30',
-    metric: 'Zero Out-of-Stock',
-  },
-  {
-    title: 'CRM Dashboard',
-    desc: 'Lead conversion funnel, deal stages, client follow-up reminders & sales rep activity.',
-    icon: UserCheck,
-    color: 'from-emerald-500/20 to-green-500/20 text-emerald-300 border-emerald-500/30',
-    metric: '3x Lead Closure',
-  },
-  {
-    title: 'Student Management Dashboard',
-    desc: 'Course enrollment, fee payment status, assignment submissions & attendance tracking.',
-    icon: GraduationCap,
+    title: 'Customer Registration System',
+    desc: 'Public web form connected to Google Sheets backend with automated identity verification.',
+    icon: UserPlus,
     color: 'from-rose-500/20 to-red-500/20 text-rose-400 border-rose-500/30',
-    metric: 'Complete Edu BI',
+    metric: 'Public Web App',
   },
   {
-    title: 'Marketing Dashboard',
-    desc: 'Ad spend ROI, cost per lead (CPL), campaign conversion rates & social media analytics.',
-    icon: Megaphone,
+    title: 'Lead Management System',
+    desc: 'Inbound lead collection, source attribution, automated assignment & conversion rate tracking.',
+    icon: Target,
     color: 'from-amber-500/20 to-orange-500/20 text-amber-300 border-amber-500/30',
-    metric: 'ROI Maximizer',
+    metric: 'Conversion Tracker',
   },
 ];
 
@@ -89,17 +97,17 @@ export default function BusinessExamples() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <span className="text-xs font-bold uppercase tracking-widest text-sky-400 bg-sky-500/10 px-3.5 py-1.5 rounded-full border border-sky-500/20 inline-block">
-            Real Business Projects
+            Hands-on Systems
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
-            9 Enterprise Dashboards You Will Build
+            What You Will Build
           </h2>
           <p className="text-slate-300 text-base sm:text-lg">
-            We don't teach dry theory. You will get hands-on templates and build complete end-to-end business dashboards during the live workshop.
+            You will learn how to design, connect, and deploy 10 practical enterprise business systems during the masterclass.
           </p>
         </div>
 
-        {/* 9 Dashboards Grid */}
+        {/* 10 Systems Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {dashboards.map((item, idx) => {
             const IconComponent = item.icon;
@@ -109,7 +117,7 @@ export default function BusinessExamples() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.06 }}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
                 className="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 hover:border-slate-700 transition-all duration-300 hover:-translate-y-1 shadow-lg flex flex-col justify-between"
               >
                 <div>
@@ -127,8 +135,8 @@ export default function BusinessExamples() {
                 </div>
 
                 <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 font-mono">
-                  <span>Google Sheets + AI Template</span>
-                  <span className="text-sky-400 font-semibold">Ready to Use</span>
+                  <span>Google Sheets + Web App</span>
+                  <span className="text-sky-400 font-semibold">Live System</span>
                 </div>
               </motion.div>
             );
