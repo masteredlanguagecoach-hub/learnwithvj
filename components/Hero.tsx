@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Video, ArrowRight, Bot, Zap, CheckCircle2, Globe, Calendar, Cpu } from 'lucide-react';
+import { Sparkles, Video, ArrowRight, Bot, Zap, CheckCircle2, Globe, Calendar, Play } from 'lucide-react';
 
 export default function Hero() {
   const scrollToSection = (id: string) => {
@@ -135,88 +135,48 @@ export default function Hero() {
 
           </div>
 
-          {/* Right Column: Modern System Architecture Graphic Preview */}
+          {/* Right Column: Featured YouTube Video Player Container */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-5 relative"
           >
-            {/* Outer Frame */}
-            <div className="relative mx-auto max-w-lg lg:max-w-none rounded-3xl bg-slate-900/90 border border-slate-800/90 p-5 shadow-2xl backdrop-blur-xl">
+            {/* Outer Luxury Frame */}
+            <div className="relative mx-auto max-w-lg lg:max-w-none rounded-3xl bg-slate-900/95 border-2 border-blue-500/40 p-4 sm:p-5 shadow-2xl shadow-blue-600/20 backdrop-blur-xl">
               
               {/* Header Bar */}
-              <div className="flex items-center justify-between border-b border-slate-800/80 pb-4 mb-4">
+              <div className="flex items-center justify-between border-b border-slate-800/80 pb-3 mb-3">
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 rounded-full bg-rose-500/80" />
                   <div className="w-3 h-3 rounded-full bg-amber-500/80" />
                   <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="ml-2 text-xs font-semibold text-slate-400">September 1 Live Masterclass</span>
+                  <span className="ml-2 text-xs font-semibold text-slate-300">Watch Workshop Teaser</span>
                 </div>
-                <span className="text-[11px] font-bold text-sky-400 bg-sky-500/10 px-2.5 py-1 rounded-md border border-sky-500/20 flex items-center gap-1">
-                  <Globe className="w-3 h-3" /> Web App Connected
+                <span className="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20 flex items-center gap-1.5">
+                  <Play className="w-3 h-3 text-emerald-400 fill-current" /> Live Masterclass Preview
                 </span>
               </div>
 
-              {/* Architecture Flow Animation Graphic */}
-              <div className="bg-slate-950/90 border border-slate-800/80 rounded-2xl p-4 mb-4 space-y-3">
-                <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                  <Cpu className="w-4 h-4 text-indigo-400" /> Full Stack No-Code Workflow:
-                </div>
-
-                <div className="grid grid-cols-4 gap-2 text-center text-[10px] font-bold">
-                  <div className="bg-blue-600/20 border border-blue-500/40 rounded-xl p-2.5 text-blue-300">
-                    User / Form
-                  </div>
-                  <div className="bg-indigo-600/20 border border-indigo-500/40 rounded-xl p-2.5 text-indigo-300">
-                    Web App UI
-                  </div>
-                  <div className="bg-violet-600/20 border border-violet-500/40 rounded-xl p-2.5 text-violet-300">
-                    AI Backend
-                  </div>
-                  <div className="bg-emerald-600/20 border border-emerald-500/40 rounded-xl p-2.5 text-emerald-300">
-                    Sheets DB
-                  </div>
-                </div>
-
-                <div className="h-1 w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-emerald-400 rounded-full animate-pulse" />
+              {/* Responsive 16:9 HD YouTube Embed */}
+              <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-950">
+                <iframe
+                  src="https://www.youtube.com/embed/j0ojPumgmBg?rel=0&autoplay=0"
+                  title="AI Business System Design Masterclass Preview"
+                  className="absolute top-0 left-0 w-full h-full rounded-2xl"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
               </div>
 
-              {/* Stat Metric Cards Grid */}
-              <div className="grid grid-cols-2 gap-3 mb-4">
-                <div className="bg-slate-950/80 border border-slate-800/80 rounded-2xl p-4">
-                  <div className="flex justify-between items-center text-xs text-slate-400 mb-1">
-                    <span>Workshop Date</span>
-                    <Calendar className="w-3.5 h-3.5 text-amber-400" />
-                  </div>
-                  <div className="text-lg font-extrabold text-amber-300">Sept 1, 2026</div>
-                  <span className="text-[10px] text-slate-400 font-semibold">Live Google Meet</span>
+              {/* Bottom Caption Box */}
+              <div className="mt-3 bg-slate-950/80 border border-slate-800/80 rounded-xl p-3 flex items-center justify-between">
+                <div className="flex items-center space-x-2.5 text-xs text-slate-300">
+                  <Sparkles className="w-4 h-4 text-sky-400 shrink-0" />
+                  <span className="font-semibold text-white">Watch how Veeje converts ideas to complete Web Apps</span>
                 </div>
-                <div className="bg-slate-950/80 border border-slate-800/80 rounded-2xl p-4">
-                  <div className="flex justify-between items-center text-xs text-slate-400 mb-1">
-                    <span>Special Price</span>
-                    <Zap className="w-3.5 h-3.5 text-emerald-400" />
-                  </div>
-                  <div className="text-xl font-black text-emerald-400">₹249 Only</div>
-                  <span className="text-[10px] text-emerald-400 font-semibold">Instant Access</span>
-                </div>
-              </div>
-
-              {/* AI Prompt Floating Box */}
-              <div className="bg-gradient-to-r from-blue-950/90 to-indigo-950/90 border border-blue-800/60 rounded-xl p-3 flex items-center justify-between shadow-lg">
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 rounded-lg bg-blue-600/30 flex items-center justify-center text-blue-300">
-                    <Bot className="w-4 h-4 animate-bounce" />
-                  </div>
-                  <div>
-                    <span className="text-[11px] text-blue-300 font-semibold block">AI System Prompt</span>
-                    <span className="text-xs text-slate-200 font-mono">
-                      "Generate Apps Script API for Web App..."
-                    </span>
-                  </div>
-                </div>
-                <span className="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-2 py-1 rounded-md border border-emerald-500/30">
-                  Ready
+                <span className="text-[10px] font-mono font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+                  SEPT 1 LIVE
                 </span>
               </div>
 
