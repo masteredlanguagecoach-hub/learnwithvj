@@ -13,6 +13,9 @@ import {
   CheckCircle2,
   AlertCircle,
   LogOut,
+  Calendar,
+  X,
+  Filter,
 } from 'lucide-react';
 import { formatINR } from '@/lib/utils';
 
@@ -35,6 +38,9 @@ export default function AdminDashboard() {
   const [search, setSearch] = useState('');
   const [professionFilter, setProfessionFilter] = useState('ALL');
   const [statusFilter, setStatusFilter] = useState('ALL');
+  const [datePreset, setDatePreset] = useState('ALL');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
   useEffect(() => {
     // Check if session token exists
@@ -85,6 +91,11 @@ export default function AdminDashboard() {
       if (search) query.append('search', search);
       if (professionFilter !== 'ALL') query.append('profession', professionFilter);
       if (statusFilter !== 'ALL') query.append('status', statusFilter);
+      if (datePreset !== 'ALL') query.append('datePreset', datePreset);
+      if (datePreset === 'CUSTOM') {
+        if (startDate) query.append('startDate', startDate);
+        if (endDate) query.append('endDate', endDate);
+      }
 
       const res = await fetch(`/api/admin/registrations?${query.toString()}`);
       const data = await res.json();
@@ -106,13 +117,27 @@ export default function AdminDashboard() {
     if (authenticated) {
       fetchData();
     }
-  }, [search, professionFilter, statusFilter, authenticated]);
+  }, [search, professionFilter, statusFilter, datePreset, startDate, endDate, authenticated]);
+
+  const handleResetFilters = () => {
+    setSearch('');
+    setProfessionFilter('ALL');
+    setStatusFilter('ALL');
+    setDatePreset('ALL');
+    setStartDate('');
+    setEndDate('');
+  };
 
   const handleDownloadCSV = () => {
     const query = new URLSearchParams();
     if (search) query.append('search', search);
     if (professionFilter !== 'ALL') query.append('profession', professionFilter);
     if (statusFilter !== 'ALL') query.append('status', statusFilter);
+    if (datePreset !== 'ALL') query.append('datePreset', datePreset);
+    if (datePreset === 'CUSTOM') {
+      if (startDate) query.append('startDate', startDate);
+      if (endDate) query.append('endDate', endDate);
+    }
     query.append('format', 'csv');
 
     window.open(`/api/admin/registrations?${query.toString()}`, '_blank');
@@ -164,6 +189,8 @@ export default function AdminDashboard() {
     );
   }
 
+  const isFiltered = search || professionFilter !== 'ALL' || statusFilter !== 'ALL' || datePreset !== 'ALL';
+
   return (
     <div className="min-h-screen bg-slate-950 text-white p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto space-y-8">
@@ -193,7 +220,7 @@ export default function AdminDashboard() {
               className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-2 shadow-md"
             >
               <Download className="w-4 h-4" />
-              <span>Export CSV</span>
+              <span>Export Filtered CSV</span>
             </button>
             <button
               onClick={handleLogout}
@@ -210,7 +237,7 @@ export default function AdminDashboard() {
           {/* Total Revenue */}
           <div className="bg-slate-900/90 border border-slate-800 rounded-3xl p-6">
             <div className="flex justify-between items-center text-xs text-slate-400 mb-2">
-              <span>Total Revenue</span>
+              <span>Selected Period Revenue</span>
               <div className="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
                 <DollarSign className="w-4 h-4" />
               </div>
@@ -256,50 +283,120 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* Filters & Data Table */}
+        {/* Filters & Data Table Container */}
         <div className="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 space-y-6">
           
-          {/* Controls Header */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            
-            {/* Search Input */}
-            <div className="relative w-full md:w-80">
-              <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
-              <input
-                type="text"
-                placeholder="Search name, email, problem..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-blue-500"
-              />
+          {/* Advanced Date & Filter Bar */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2 text-xs font-bold text-slate-300 uppercase tracking-wider">
+                <Filter className="w-4 h-4 text-sky-400" />
+                <span>Filters & Search</span>
+              </div>
+              {isFiltered && (
+                <button
+                  onClick={handleResetFilters}
+                  className="text-xs text-rose-400 hover:text-rose-300 font-semibold flex items-center gap-1 bg-rose-500/10 border border-rose-500/20 px-3 py-1.5 rounded-lg transition-colors"
+                >
+                  <X className="w-3.5 h-3.5" />
+                  <span>Reset All Filters</span>
+                </button>
+              )}
             </div>
 
-            {/* Filter Dropdowns */}
-            <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
-              <select
-                value={professionFilter}
-                onChange={(e) => setProfessionFilter(e.target.value)}
-                className="px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 focus:outline-none"
-              >
-                <option value="ALL">All Professions</option>
-                <option value="Business Owner">Business Owner</option>
-                <option value="Student">Student</option>
-                <option value="Office Staff / Analyst">Office Staff</option>
-                <option value="Manager / Team Lead">Manager</option>
-                <option value="HR Professional">HR Professional</option>
-                <option value="Freelancer / Consultant">Freelancer</option>
-              </select>
+            {/* Filter Controls Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3">
+              
+              {/* Search Box */}
+              <div className="lg:col-span-4 relative">
+                <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  placeholder="Search name, email, phone, city..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-blue-500"
+                />
+              </div>
 
-              <select
-                value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 focus:outline-none"
-              >
-                <option value="ALL">All Statuses</option>
-                <option value="SUCCESS">SUCCESS</option>
-                <option value="PENDING">PENDING</option>
-              </select>
+              {/* Date Preset Selector */}
+              <div className="lg:col-span-3 relative">
+                <div className="flex items-center">
+                  <Calendar className="w-4 h-4 text-sky-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <select
+                    value={datePreset}
+                    onChange={(e) => setDatePreset(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-200 focus:outline-none focus:border-blue-500 font-medium cursor-pointer"
+                  >
+                    <option value="ALL">📅 Date Filter: All Time</option>
+                    <option value="TODAY">📅 Today</option>
+                    <option value="YESTERDAY">📅 Yesterday</option>
+                    <option value="WEEKLY">📅 This Week (Last 7 Days)</option>
+                    <option value="MONTHLY">📅 This Month (Last 30 Days)</option>
+                    <option value="YEARLY">📅 This Year (Last 365 Days)</option>
+                    <option value="CUSTOM">🗓️ Custom Date Range (Date to Date)</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Profession Filter */}
+              <div className="lg:col-span-3">
+                <select
+                  value={professionFilter}
+                  onChange={(e) => setProfessionFilter(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 focus:outline-none focus:border-blue-500 cursor-pointer"
+                >
+                  <option value="ALL">All Professions</option>
+                  <option value="Business Owner">Business Owner</option>
+                  <option value="Student">Student</option>
+                  <option value="Office Staff / Analyst">Office Staff</option>
+                  <option value="Manager / Team Lead">Manager</option>
+                  <option value="HR Professional">HR Professional</option>
+                  <option value="Freelancer / Consultant">Freelancer</option>
+                </select>
+              </div>
+
+              {/* Status Filter */}
+              <div className="lg:col-span-2">
+                <select
+                  value={statusFilter}
+                  onChange={(e) => setStatusFilter(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 focus:outline-none focus:border-blue-500 cursor-pointer"
+                >
+                  <option value="ALL">All Statuses</option>
+                  <option value="SUCCESS">SUCCESS</option>
+                  <option value="PENDING">PENDING</option>
+                </select>
+              </div>
+
             </div>
+
+            {/* Custom Date-to-Date Inputs (shown when datePreset === 'CUSTOM') */}
+            {datePreset === 'CUSTOM' && (
+              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 flex flex-wrap items-center gap-4 text-xs">
+                <div className="flex items-center space-x-2">
+                  <span className="text-slate-400 font-bold">Start Date:</span>
+                  <input
+                    type="date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-white focus:outline-none focus:border-blue-500 font-mono"
+                  />
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <span className="text-slate-400 font-bold">End Date:</span>
+                  <input
+                    type="date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                    className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-white focus:outline-none focus:border-blue-500 font-mono"
+                  />
+                </div>
+
+                <span className="text-slate-400 italic">Showing registrations from {startDate || 'Beginning'} to {endDate || 'Today'}</span>
+              </div>
+            )}
 
           </div>
 
@@ -325,7 +422,7 @@ export default function AdminDashboard() {
                 {registrations.length === 0 ? (
                   <tr>
                     <td colSpan={11} className="p-8 text-center text-slate-500">
-                      No registration records found.
+                      No registration records found for the selected date range or filter criteria.
                     </td>
                   </tr>
                 ) : (

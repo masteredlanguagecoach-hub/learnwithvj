@@ -1,12 +1,105 @@
 import { NextResponse } from 'next/server';
 import { db, RegistrationRecord } from '@/lib/db';
 
+function parseRecordDate(record: RegistrationRecord): Date | null {
+  if (record.createdAt) {
+    const d = new Date(record.createdAt);
+    if (!isNaN(d.getTime())) return d;
+  }
+  if (record.date) {
+    const d = new Date(record.date);
+    if (!isNaN(d.getTime())) return d;
+  }
+  return null;
+}
+
+function matchesDateFilter(
+  record: RegistrationRecord,
+  datePreset: string,
+  startDateStr?: string,
+  endDateStr?: string
+): boolean {
+  if (!datePreset || datePreset === 'ALL') return true;
+
+  const rDate = parseRecordDate(record);
+  if (!rDate) return true; // If date cannot be parsed, keep record
+
+  const now = new Date();
+
+  if (datePreset === 'TODAY') {
+    return (
+      rDate.getFullYear() === now.getFullYear() &&
+      rDate.getMonth() === now.getMonth() &&
+      rDate.getDate() === now.getDate()
+    );
+  }
+
+  if (datePreset === 'YESTERDAY') {
+    const yesterday = new Date(now);
+    yesterday.setDate(now.getDate() - 1);
+    return (
+      rDate.getFullYear() === yesterday.getFullYear() &&
+      rDate.getMonth() === yesterday.getMonth() &&
+      rDate.getDate() === yesterday.getDate()
+    );
+  }
+
+  if (datePreset === 'WEEKLY') {
+    const sevenDaysAgo = new Date(now);
+    sevenDaysAgo.setDate(now.getDate() - 7);
+    sevenDaysAgo.setHours(0, 0, 0, 0);
+    return rDate >= sevenDaysAgo;
+  }
+
+  if (datePreset === 'MONTHLY') {
+    const thirtyDaysAgo = new Date(now);
+    thirtyDaysAgo.setDate(now.getDate() - 30);
+    thirtyDaysAgo.setHours(0, 0, 0, 0);
+    return rDate >= thirtyDaysAgo;
+  }
+
+  if (datePreset === 'YEARLY') {
+    const oneYearAgo = new Date(now);
+    oneYearAgo.setFullYear(now.getFullYear() - 1);
+    oneYearAgo.setHours(0, 0, 0, 0);
+    return rDate >= oneYearAgo;
+  }
+
+  if (datePreset === 'CUSTOM') {
+    let startValid = true;
+    let endValid = true;
+
+    if (startDateStr) {
+      const startD = new Date(startDateStr);
+      startD.setHours(0, 0, 0, 0);
+      if (!isNaN(startD.getTime())) {
+        startValid = rDate >= startD;
+      }
+    }
+
+    if (endDateStr) {
+      const endD = new Date(endDateStr);
+      endD.setHours(23, 59, 59, 999);
+      if (!isNaN(endD.getTime())) {
+        endValid = rDate <= endD;
+      }
+    }
+
+    return startValid && endValid;
+  }
+
+  return true;
+}
+
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const search = searchParams.get('search')?.toLowerCase().trim() || '';
     const profession = searchParams.get('profession') || '';
     const status = searchParams.get('status') || '';
+    const datePreset = searchParams.get('datePreset') || 'ALL';
+    const startDate = searchParams.get('startDate') || '';
+    const endDate = searchParams.get('endDate') || '';
     const format = searchParams.get('format') || 'json';
 
     // 1. Load local records
@@ -40,9 +133,13 @@ export async function GET(req: Request) {
     let mergedRecords = Array.from(recordMap.values());
 
     // Sort newest first
-    mergedRecords.sort((a, b) => new Date(b.createdAt || b.date).getTime() - new Date(a.createdAt || a.date).getTime());
+    mergedRecords.sort((a, b) => {
+      const dateA = parseRecordDate(a)?.getTime() || 0;
+      const dateB = parseRecordDate(b)?.getTime() || 0;
+      return dateB - dateA;
+    });
 
-    // Apply filters
+    // Apply Search Filter
     if (search) {
       mergedRecords = mergedRecords.filter(
         (r) =>
@@ -55,13 +152,18 @@ export async function GET(req: Request) {
       );
     }
 
+    // Apply Profession Filter
     if (profession && profession !== 'ALL') {
       mergedRecords = mergedRecords.filter((r) => r.profession.toLowerCase() === profession.toLowerCase());
     }
 
+    // Apply Status Filter
     if (status && status !== 'ALL') {
       mergedRecords = mergedRecords.filter((r) => r.status === status);
     }
+
+    // Apply Date Range & Preset Filter
+    mergedRecords = mergedRecords.filter((r) => matchesDateFilter(r, datePreset, startDate, endDate));
 
     // CSV export mode
     if (format === 'csv') {
@@ -110,7 +212,9 @@ export async function GET(req: Request) {
         status: 200,
         headers: {
           'Content-Type': 'text/csv; charset=utf-8',
-          'Content-Disposition': `attachment; filename=veeje_registrations_${new Date().toISOString().slice(0, 10)}.csv`,
+          'Content-Disposition': `attachment; filename=veeje_registrations_${datePreset.toLowerCase()}_${new Date()
+            .toISOString()
+            .slice(0, 10)}.csv`,
         },
       });
     }
@@ -121,6 +225,7 @@ export async function GET(req: Request) {
       success: true,
       analytics,
       registrations: mergedRecords,
+      filteredCount: mergedRecords.length,
     });
   } catch (error: any) {
     return NextResponse.json({ error: 'SERVER_ERROR', message: error.message }, { status: 500 });
