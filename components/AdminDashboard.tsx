@@ -17,7 +17,8 @@ import {
   X,
   Filter,
   BarChart3,
-  FileSpreadsheet,
+  MessageSquare,
+  ExternalLink,
 } from 'lucide-react';
 import { formatINR } from '@/lib/utils';
 
@@ -154,6 +155,17 @@ export default function AdminDashboard() {
     window.open(`/api/admin/registrations?${query.toString()}`, '_blank');
   };
 
+  const getStudentWhatsAppUrl = (reg: any) => {
+    let rawPhone = String(reg.phone || '').replace(/\D/g, '');
+    if (rawPhone.length === 10) {
+      rawPhone = '91' + rawPhone;
+    }
+
+    const text = `Hi ${reg.name || 'Student'} 👋,\n\nYour registration for the AI Business System Design Masterclass is confirmed! 🎉\n\n🗓️ Next Session Date: September 1, 2026\n⏱️ Duration: 2 Hours 30 Minutes (Live Online)\n\nRegistration ID: ${reg.registrationId}\nPayment ID: ${reg.paymentId || 'N/A'}\n\nPlease ensure you have joined our official student WhatsApp group for live Google Meet links & dashboard templates:\nhttps://chat.whatsapp.com/H5MZSMLnKy07SlM5EGWOnc\n\nSee you in the live masterclass!\n— Veeje | Learn with Veeje`;
+
+    return `https://wa.me/${rawPhone}?text=${encodeURIComponent(text)}`;
+  };
+
   if (!authenticated) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
@@ -217,7 +229,7 @@ export default function AdminDashboard() {
               </span>
               <span className="text-xs text-slate-400 font-mono">Learn with Veeje</span>
             </div>
-            <h1 className="text-2xl font-extrabold text-white mt-1">Registrations & Sales Reports</h1>
+            <h1 className="text-2xl font-extrabold text-white mt-1">Registrations & WhatsApp Outreach</h1>
           </div>
 
           <div className="flex items-center space-x-3">
@@ -471,12 +483,13 @@ export default function AdminDashboard() {
                   <th className="p-4">Payment ID</th>
                   <th className="p-4">Amount</th>
                   <th className="p-4">Status</th>
+                  <th className="p-4 text-center">WhatsApp Direct</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800/60 bg-slate-950/60">
                 {registrations.length === 0 ? (
                   <tr>
-                    <td colSpan={11} className="p-8 text-center text-slate-500">
+                    <td colSpan={12} className="p-8 text-center text-slate-500">
                       No registration records found for the selected filter criteria.
                     </td>
                   </tr>
@@ -507,6 +520,19 @@ export default function AdminDashboard() {
                             <Clock className="w-3 h-3" /> PENDING
                           </span>
                         )}
+                      </td>
+                      <td className="p-4 text-center whitespace-nowrap">
+                        <a
+                          href={getStudentWhatsAppUrl(reg)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/30 hover:text-white font-bold text-[11px] transition-all shadow-sm group"
+                          title={`Send WhatsApp confirmation message to ${reg.name}`}
+                        >
+                          <MessageSquare className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
+                          <span>WhatsApp Me</span>
+                          <ExternalLink className="w-3 h-3 text-emerald-400/70" />
+                        </a>
                       </td>
                     </tr>
                   ))
