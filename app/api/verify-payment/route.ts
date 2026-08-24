@@ -72,14 +72,14 @@ export async function POST(req: Request) {
         paymentId,
         orderId,
         signature: signature || 'verified_signature',
-        amount: 3,
+        amount: 249,
         status: 'SUCCESS',
         createdAt: now.toISOString(),
       };
     } else {
       record.status = 'SUCCESS';
       record.paymentId = paymentId;
-      record.amount = 3;
+      record.amount = 249;
       record.signature = signature || 'verified_signature';
     }
 
@@ -98,7 +98,7 @@ export async function POST(req: Request) {
       toEmail: record.email,
       studentName: record.name,
       courseName: record.course,
-      amountPaid: 3,
+      amountPaid: 249,
       paymentId: record.paymentId,
       registrationId: record.registrationId,
     }).catch((emailErr) => {
@@ -110,7 +110,7 @@ export async function POST(req: Request) {
       registrationId: record.registrationId,
       studentName: record.name,
       courseName: record.course,
-      amountPaid: 3,
+      amountPaid: 249,
       paymentId: record.paymentId,
     });
   } catch (error: any) {

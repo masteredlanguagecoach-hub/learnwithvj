@@ -353,7 +353,7 @@ export default function RegistrationForm() {
                 </div>
                 <div className="text-right">
                   <span className="text-xs text-slate-500 line-through mr-2">₹999</span>
-                  <span className="text-2xl font-black text-white">₹3</span>
+                  <span className="text-2xl font-black text-white">₹249</span>
                 </div>
               </div>
 
@@ -370,7 +370,7 @@ export default function RegistrationForm() {
                 ) : (
                   <>
                     <Lock className="w-5 h-5 text-blue-300" />
-                    <span>Proceed to Pay ₹3</span>
+                    <span>Proceed to Pay ₹249</span>
                   </>
                 )}
               </button>

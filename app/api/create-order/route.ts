@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     }
 
     const registrationId = generateRegistrationId();
-    const amountInPaise = 3 * 100; // ₹3 in paise (300 paise)
+    const amountInPaise = 249 * 100; // ₹249 in paise (24900 paise)
 
     let orderId = `order_live_${Date.now()}`;
 
@@ -74,7 +74,7 @@ export async function POST(req: Request) {
       paymentId: '',
       orderId,
       signature: '',
-      amount: 3,
+      amount: 249,
       status: 'PENDING',
       createdAt: now.toISOString(),
     });

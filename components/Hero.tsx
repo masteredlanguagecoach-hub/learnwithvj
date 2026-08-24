@@ -96,10 +96,10 @@ export default function Hero() {
               <div>
                 <span className="text-xs text-slate-400 block font-medium">Special Workshop Price</span>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-black text-white">₹3</span>
+                  <span className="text-3xl font-black text-white">₹249</span>
                   <span className="text-sm text-slate-500 line-through">₹999</span>
                   <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
-                    SAVE 99%
+                    SAVE 75%
                   </span>
                 </div>
               </div>
@@ -121,7 +121,7 @@ export default function Hero() {
                 onClick={() => scrollToSection('register')}
                 className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-base text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 transition-all duration-200 shadow-xl shadow-blue-600/30 hover:shadow-2xl hover:shadow-blue-600/40 active:scale-95 flex items-center justify-center gap-2"
               >
-                <span>Enroll Now for ₹3</span>
+                <span>Enroll Now for ₹249</span>
                 <ArrowRight className="w-5 h-5" />
               </button>
 
@@ -197,7 +197,7 @@ export default function Hero() {
                     <span>Special Price</span>
                     <Zap className="w-3.5 h-3.5 text-emerald-400" />
                   </div>
-                  <div className="text-xl font-black text-emerald-400">₹3 Only</div>
+                  <div className="text-xl font-black text-emerald-400">₹249 Only</div>
                   <span className="text-[10px] text-emerald-400 font-semibold">Instant Access</span>
                 </div>
               </div>

@@ -67,11 +67,11 @@ export default function PricingCard() {
           <div className="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 max-w-md mx-auto mb-8 backdrop-blur-md">
             <div className="text-xs uppercase font-bold text-slate-400 tracking-wider mb-1">Today's Special Price</div>
             <div className="flex items-center justify-center gap-3 mb-2">
-              <span className="text-5xl sm:text-6xl font-black text-white tracking-tight">₹3</span>
+              <span className="text-5xl sm:text-6xl font-black text-white tracking-tight">₹249</span>
               <div className="text-left">
                 <span className="text-lg text-slate-500 line-through block leading-tight">₹999</span>
                 <span className="text-xs font-bold text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded border border-emerald-500/30">
-                  SAVE 99%
+                  SAVE 75%
                 </span>
               </div>
             </div>
@@ -111,7 +111,7 @@ export default function PricingCard() {
             onClick={scrollToRegister}
             className="w-full max-w-md mx-auto py-4 px-8 rounded-2xl font-bold text-lg text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 transition-all duration-200 shadow-xl shadow-blue-600/40 hover:shadow-2xl active:scale-95 flex items-center justify-center gap-2"
           >
-            <span>Enroll Now for ₹3</span>
+            <span>Enroll Now for ₹249</span>
             <ArrowRight className="w-5 h-5" />
           </button>
 

@@ -73,7 +73,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center space-x-4">
           <div className="text-right">
             <span className="text-xs text-slate-400 block line-through">₹999</span>
-            <span className="text-sm font-bold text-emerald-400">₹3 ONLY</span>
+            <span className="text-sm font-bold text-emerald-400">₹249 ONLY</span>
           </div>
           <button
             onClick={() => scrollToSection('register')}
@@ -117,7 +117,7 @@ export default function Navbar() {
           <div className="pt-2 border-t border-slate-800 flex items-center justify-between">
             <div>
               <span className="text-xs text-slate-400 block line-through">₹999</span>
-              <span className="text-base font-bold text-emerald-400">Today ₹3</span>
+              <span className="text-base font-bold text-emerald-400">Today ₹249</span>
             </div>
             <button
               onClick={() => scrollToSection('register')}
