@@ -16,6 +16,8 @@ import {
   Calendar,
   X,
   Filter,
+  BarChart3,
+  FileSpreadsheet,
 } from 'lucide-react';
 import { formatINR } from '@/lib/utils';
 
@@ -26,12 +28,21 @@ export default function AdminDashboard() {
   const [loginLoading, setLoginLoading] = useState(false);
 
   const [registrations, setRegistrations] = useState<any[]>([]);
-  const [analytics, setAnalytics] = useState({
-    totalStudents: 0,
-    totalRevenue: 0,
-    todaySales: 0,
-    todayRevenue: 0,
-    pendingCount: 0,
+  const [analytics, setAnalytics] = useState<any>({
+    allTime: {
+      totalStudents: 0,
+      totalRevenue: 0,
+      todaySales: 0,
+      todayRevenue: 0,
+      pendingCount: 0,
+    },
+    filtered: {
+      periodLabel: 'All Time',
+      totalRecords: 0,
+      studentsCount: 0,
+      amountCollected: 0,
+      pendingCount: 0,
+    },
   });
 
   const [loading, setLoading] = useState(false);
@@ -190,6 +201,8 @@ export default function AdminDashboard() {
   }
 
   const isFiltered = search || professionFilter !== 'ALL' || statusFilter !== 'ALL' || datePreset !== 'ALL';
+  const filteredData = analytics.filtered || {};
+  const allTimeData = analytics.allTime || {};
 
   return (
     <div className="min-h-screen bg-slate-950 text-white p-4 sm:p-6 lg:p-8">
@@ -204,7 +217,7 @@ export default function AdminDashboard() {
               </span>
               <span className="text-xs text-slate-400 font-mono">Learn with Veeje</span>
             </div>
-            <h1 className="text-2xl font-extrabold text-white mt-1">Registrations & Analytics</h1>
+            <h1 className="text-2xl font-extrabold text-white mt-1">Registrations & Sales Reports</h1>
           </div>
 
           <div className="flex items-center space-x-3">
@@ -220,7 +233,7 @@ export default function AdminDashboard() {
               className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-2 shadow-md"
             >
               <Download className="w-4 h-4" />
-              <span>Export Filtered CSV</span>
+              <span>Export Sales Report CSV</span>
             </button>
             <button
               onClick={handleLogout}
@@ -232,30 +245,72 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* Metric Cards Grid */}
+        {/* Dynamic Sales Report Summary Banner */}
+        <div className="bg-gradient-to-r from-blue-950/90 via-slate-900 to-indigo-950/90 border border-blue-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
+            <div>
+              <div className="flex items-center space-x-2 text-sky-400 text-xs font-bold uppercase tracking-wider mb-2">
+                <BarChart3 className="w-4 h-4 text-sky-400" />
+                <span>Sales Report Summary • {filteredData.periodLabel || 'All Time'}</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                {formatINR(filteredData.amountCollected || 0)}
+              </h2>
+              <p className="text-slate-300 text-sm mt-1">
+                Total Amount Collected from <strong>{filteredData.studentsCount || 0} Paid Students</strong> for this filter.
+              </p>
+            </div>
+
+            {/* Quick Report Metric Cards Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full md:w-auto">
+              {/* Student Count */}
+              <div className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 text-center">
+                <span className="text-[10px] text-slate-400 uppercase font-bold block">Students Count</span>
+                <span className="text-2xl font-black text-emerald-400">{filteredData.studentsCount || 0}</span>
+                <span className="text-[10px] text-slate-500 block">Enrolled</span>
+              </div>
+
+              {/* Amount Collected */}
+              <div className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 text-center">
+                <span className="text-[10px] text-slate-400 uppercase font-bold block">Amount Collected</span>
+                <span className="text-2xl font-black text-white">{formatINR(filteredData.amountCollected || 0)}</span>
+                <span className="text-[10px] text-emerald-400 block font-semibold">Razorpay Verified</span>
+              </div>
+
+              {/* Pending Orders */}
+              <div className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 text-center col-span-2 sm:col-span-1">
+                <span className="text-[10px] text-slate-400 uppercase font-bold block">Pending Orders</span>
+                <span className="text-2xl font-black text-amber-400">{filteredData.pendingCount || 0}</span>
+                <span className="text-[10px] text-slate-500 block">Awaiting</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* All-Time Metric Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {/* Total Revenue */}
           <div className="bg-slate-900/90 border border-slate-800 rounded-3xl p-6">
             <div className="flex justify-between items-center text-xs text-slate-400 mb-2">
-              <span>Selected Period Revenue</span>
+              <span>All-Time Revenue</span>
               <div className="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
                 <DollarSign className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-3xl font-black text-white">{formatINR(analytics.totalRevenue)}</div>
-            <span className="text-xs text-emerald-400 font-semibold block mt-1">Verified Razorpay Payments</span>
+            <div className="text-3xl font-black text-white">{formatINR(allTimeData.totalRevenue || 0)}</div>
+            <span className="text-xs text-emerald-400 font-semibold block mt-1">Total Lifetime Collected</span>
           </div>
 
           {/* Total Students */}
           <div className="bg-slate-900/90 border border-slate-800 rounded-3xl p-6">
             <div className="flex justify-between items-center text-xs text-slate-400 mb-2">
-              <span>Paid Students</span>
+              <span>All-Time Paid Students</span>
               <div className="w-8 h-8 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center">
                 <Users className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-3xl font-black text-white">{analytics.totalStudents}</div>
-            <span className="text-xs text-blue-400 font-semibold block mt-1">Confirmed Enrolled</span>
+            <div className="text-3xl font-black text-white">{allTimeData.totalStudents || 0}</div>
+            <span className="text-xs text-blue-400 font-semibold block mt-1">Confirmed Lifetime Enrolled</span>
           </div>
 
           {/* Today's Sales */}
@@ -266,8 +321,8 @@ export default function AdminDashboard() {
                 <TrendingUp className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-3xl font-black text-white">{analytics.todaySales} Students</div>
-            <span className="text-xs text-indigo-400 font-semibold block mt-1">Revenue: {formatINR(analytics.todayRevenue)}</span>
+            <div className="text-3xl font-black text-white">{allTimeData.todaySales || 0} Students</div>
+            <span className="text-xs text-indigo-400 font-semibold block mt-1">Revenue: {formatINR(allTimeData.todayRevenue || 0)}</span>
           </div>
 
           {/* Pending / Failed */}
@@ -278,7 +333,7 @@ export default function AdminDashboard() {
                 <Clock className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-3xl font-black text-amber-400">{analytics.pendingCount}</div>
+            <div className="text-3xl font-black text-amber-400">{allTimeData.pendingCount || 0}</div>
             <span className="text-xs text-amber-400/80 font-semibold block mt-1">Awaiting Payment</span>
           </div>
         </div>
@@ -291,7 +346,7 @@ export default function AdminDashboard() {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2 text-xs font-bold text-slate-300 uppercase tracking-wider">
                 <Filter className="w-4 h-4 text-sky-400" />
-                <span>Filters & Search</span>
+                <span>Filter Sales Data</span>
               </div>
               {isFiltered && (
                 <button
@@ -328,7 +383,7 @@ export default function AdminDashboard() {
                     onChange={(e) => setDatePreset(e.target.value)}
                     className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-200 focus:outline-none focus:border-blue-500 font-medium cursor-pointer"
                   >
-                    <option value="ALL">📅 Date Filter: All Time</option>
+                    <option value="ALL">📅 Date Range: All Time</option>
                     <option value="TODAY">📅 Today</option>
                     <option value="YESTERDAY">📅 Yesterday</option>
                     <option value="WEEKLY">📅 This Week (Last 7 Days)</option>
@@ -394,7 +449,7 @@ export default function AdminDashboard() {
                   />
                 </div>
 
-                <span className="text-slate-400 italic">Showing registrations from {startDate || 'Beginning'} to {endDate || 'Today'}</span>
+                <span className="text-slate-400 italic">Showing sales report from {startDate || 'Beginning'} to {endDate || 'Today'}</span>
               </div>
             )}
 
@@ -422,7 +477,7 @@ export default function AdminDashboard() {
                 {registrations.length === 0 ? (
                   <tr>
                     <td colSpan={11} className="p-8 text-center text-slate-500">
-                      No registration records found for the selected date range or filter criteria.
+                      No registration records found for the selected filter criteria.
                     </td>
                   </tr>
                 ) : (

@@ -22,7 +22,7 @@ function matchesDateFilter(
   if (!datePreset || datePreset === 'ALL') return true;
 
   const rDate = parseRecordDate(record);
-  if (!rDate) return true; // If date cannot be parsed, keep record
+  if (!rDate) return true; // Keep record if date unparseable
 
   const now = new Date();
 
@@ -139,6 +139,8 @@ export async function GET(req: Request) {
       return dateB - dateA;
     });
 
+    const allTimeAnalytics = db.calculateAnalytics(mergedRecords);
+
     // Apply Search Filter
     if (search) {
       mergedRecords = mergedRecords.filter(
@@ -212,20 +214,42 @@ export async function GET(req: Request) {
         status: 200,
         headers: {
           'Content-Type': 'text/csv; charset=utf-8',
-          'Content-Disposition': `attachment; filename=veeje_registrations_${datePreset.toLowerCase()}_${new Date()
+          'Content-Disposition': `attachment; filename=veeje_sales_report_${datePreset.toLowerCase()}_${new Date()
             .toISOString()
             .slice(0, 10)}.csv`,
         },
       });
     }
 
-    const analytics = db.calculateAnalytics(mergedRecords);
+    // Calculate Sales Report metrics specifically for the active filtered dataset
+    const filteredSuccessful = mergedRecords.filter((r) => r.status === 'SUCCESS');
+    const filteredTotalAmount = filteredSuccessful.reduce((sum, r) => sum + (Number(r.amount) || 3), 0);
+    const filteredPending = mergedRecords.filter((r) => r.status === 'PENDING').length;
+
+    let periodLabel = 'All Time';
+    if (datePreset === 'TODAY') periodLabel = 'Today';
+    else if (datePreset === 'YESTERDAY') periodLabel = 'Yesterday';
+    else if (datePreset === 'WEEKLY') periodLabel = 'This Week (Last 7 Days)';
+    else if (datePreset === 'MONTHLY') periodLabel = 'This Month (Last 30 Days)';
+    else if (datePreset === 'YEARLY') periodLabel = 'This Year (365 Days)';
+    else if (datePreset === 'CUSTOM')
+      periodLabel = `Custom Range (${startDate || 'Start'} to ${endDate || 'Today'})`;
+
+    const reportAnalytics = {
+      allTime: allTimeAnalytics,
+      filtered: {
+        periodLabel,
+        totalRecords: mergedRecords.length,
+        studentsCount: filteredSuccessful.length,
+        amountCollected: filteredTotalAmount,
+        pendingCount: filteredPending,
+      },
+    };
 
     return NextResponse.json({
       success: true,
-      analytics,
+      analytics: reportAnalytics,
       registrations: mergedRecords,
-      filteredCount: mergedRecords.length,
     });
   } catch (error: any) {
     return NextResponse.json({ error: 'SERVER_ERROR', message: error.message }, { status: 500 });
