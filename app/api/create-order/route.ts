@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     }
 
     const registrationId = generateRegistrationId();
-    const amountInPaise = 249 * 100; // ₹249 in paise (24900 paise)
+    const amountInPaise = 111 * 100; // ₹111 Onam Special Offer (11100 paise)
 
     let orderId = `order_live_${Date.now()}`;
 
@@ -49,6 +49,7 @@ export async function POST(req: Request) {
           studentPhone: validatedData.phone,
           problemToSolve: validatedData.problemToSolve,
           eventDate: 'September 1, 2026',
+          offer: 'Onam Special Offer ₹111',
         },
       });
       if (order && order.id) {
@@ -74,7 +75,7 @@ export async function POST(req: Request) {
       paymentId: '',
       orderId,
       signature: '',
-      amount: 249,
+      amount: 111,
       status: 'PENDING',
       createdAt: now.toISOString(),
     });

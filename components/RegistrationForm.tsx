@@ -111,7 +111,7 @@ export default function RegistrationForm() {
         amount: amount,
         currency: 'INR',
         name: 'Learn with Veeje',
-        description: 'AI Business System Design Masterclass (Sept 1)',
+        description: 'AI Business System Design Masterclass (Onam Offer ₹111)',
         order_id: orderId,
         prefill: {
           name: data.name,
@@ -119,7 +119,7 @@ export default function RegistrationForm() {
           contact: data.phone,
         },
         theme: {
-          color: '#2563eb',
+          color: '#d97706',
         },
         handler: async function (response: any) {
           await handlePaymentVerification({
@@ -199,8 +199,8 @@ export default function RegistrationForm() {
         
         {/* Header */}
         <div className="text-center max-w-xl mx-auto mb-10 space-y-3">
-          <span className="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20 inline-flex items-center gap-1.5">
-            <Calendar className="w-3.5 h-3.5" /> Event Date: September 1, 2026
+          <span className="text-xs font-black uppercase tracking-widest text-amber-300 bg-amber-500/20 px-3.5 py-1.5 rounded-full border border-amber-500/30 inline-flex items-center gap-1.5 shadow-sm">
+            🌺 ONAM SPECIAL OFFER • SEPTEMBER 1, 2026
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
             Reserve Your Seat Now
@@ -238,7 +238,7 @@ export default function RegistrationForm() {
                   type="text"
                   placeholder="e.g. Rahul Sharma"
                   {...register('name')}
-                  className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm font-medium transition-all"
+                  className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm font-medium transition-all"
                 />
               </div>
               {errors.name && <p className="mt-1 text-xs text-rose-400">{errors.name.message}</p>}
@@ -257,7 +257,7 @@ export default function RegistrationForm() {
                     type="email"
                     placeholder="rahul@example.com"
                     {...register('email')}
-                    className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm font-medium transition-all"
+                    className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm font-medium transition-all"
                   />
                 </div>
                 {errors.email && <p className="mt-1 text-xs text-rose-400">{errors.email.message}</p>}
@@ -274,7 +274,7 @@ export default function RegistrationForm() {
                     type="tel"
                     placeholder="10-digit WhatsApp number"
                     {...register('phone')}
-                    className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm font-medium transition-all"
+                    className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm font-medium transition-all"
                   />
                 </div>
                 {errors.phone && <p className="mt-1 text-xs text-rose-400">{errors.phone.message}</p>}
@@ -294,7 +294,7 @@ export default function RegistrationForm() {
                     type="text"
                     placeholder="e.g. Mumbai, Bengaluru, Kochi"
                     {...register('city')}
-                    className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm font-medium transition-all"
+                    className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm font-medium transition-all"
                   />
                 </div>
                 {errors.city && <p className="mt-1 text-xs text-rose-400">{errors.city.message}</p>}
@@ -309,7 +309,7 @@ export default function RegistrationForm() {
                   <Briefcase className="w-5 h-5 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
                   <select
                     {...register('profession')}
-                    className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm font-medium transition-all appearance-none cursor-pointer"
+                    className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm font-medium transition-all appearance-none cursor-pointer"
                   >
                     <option value="">Select Profession</option>
                     <option value="Business Owner">Business Owner</option>
@@ -338,7 +338,7 @@ export default function RegistrationForm() {
                   rows={3}
                   placeholder="e.g. I want to build an automated attendance & payroll system for my 20 employees / build a CRM dashboard..."
                   {...register('problemToSolve')}
-                  className="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm font-medium transition-all"
+                  className="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm font-medium transition-all"
                 />
               </div>
               {errors.problemToSolve && <p className="mt-1 text-xs text-rose-400">{errors.problemToSolve.message}</p>}
@@ -346,21 +346,21 @@ export default function RegistrationForm() {
 
             {/* Price & Submit CTA Box */}
             <div className="pt-4 border-t border-slate-800">
-              <div className="flex items-center justify-between mb-4 bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
+              <div className="flex items-center justify-between mb-4 bg-slate-950/80 p-4 rounded-2xl border border-amber-500/30">
                 <div>
-                  <span className="text-xs text-slate-400 block font-medium">Total Payable Amount</span>
-                  <span className="text-xs text-emerald-400 font-bold">Includes Masterclass + Web App Templates</span>
+                  <span className="text-xs text-amber-400 font-bold block">🌺 Onam Special Offer Payable</span>
+                  <span className="text-xs text-slate-400">Includes Masterclass + Web App Templates</span>
                 </div>
                 <div className="text-right">
                   <span className="text-xs text-slate-500 line-through mr-2">₹999</span>
-                  <span className="text-2xl font-black text-white">₹249</span>
+                  <span className="text-3xl font-black text-amber-300">₹111</span>
                 </div>
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 rounded-2xl font-bold text-base text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 transition-all duration-200 shadow-xl shadow-blue-600/30 active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-4 rounded-2xl font-black text-base text-white bg-gradient-to-r from-amber-600 via-orange-600 to-amber-500 hover:from-amber-500 hover:to-orange-500 transition-all duration-200 shadow-xl shadow-amber-600/30 active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <>
@@ -369,8 +369,8 @@ export default function RegistrationForm() {
                   </>
                 ) : (
                   <>
-                    <Lock className="w-5 h-5 text-blue-300" />
-                    <span>Proceed to Pay ₹249</span>
+                    <Lock className="w-5 h-5 text-amber-200" />
+                    <span>Proceed to Pay ₹111 (Onam Special Offer)</span>
                   </>
                 )}
               </button>

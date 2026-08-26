@@ -11,7 +11,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'AI Business System Design Masterclass | Learn with Veeje',
   description:
-    'Master Business System Design, Google Sheets Database Architecture & Web App Automation with AI. Live 2.5-Hour Practical Workshop on September 1, 2026.',
+    'Master Business System Design, Google Sheets Database Architecture & Web App Automation with AI. Onam Special Offer ₹111. Live 2.5-Hour Practical Workshop on September 1, 2026.',
   keywords: [
     'AI Business System Design',
     'Learn with Veeje',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AI Business System Design Masterclass | Learn with Veeje',
     description:
-      'Convert business ideas into complete web apps & Google Sheets databases without traditional programming. Live on September 1, 2026.',
+      'Convert business ideas into complete web apps & Google Sheets databases without traditional programming. Live on September 1, 2026. Onam Special Offer ₹111.',
     type: 'website',
     locale: 'en_IN',
     siteName: 'Learn with Veeje',
@@ -51,7 +51,7 @@ export default function RootLayout({
     startDate: '2026-09-01',
     offers: {
       '@type': 'Offer',
-      price: '249',
+      price: '111',
       priceCurrency: 'INR',
       availability: 'https://schema.org/InStock',
     },
@@ -65,7 +65,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} font-sans bg-slate-950 text-slate-100 antialiased selection:bg-blue-500 selection:text-white`}>
+      <body className={`${inter.variable} font-sans bg-slate-950 text-slate-100 antialiased selection:bg-amber-500 selection:text-white`}>
         {children}
       </body>
     </html>

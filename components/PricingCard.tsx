@@ -34,7 +34,7 @@ export default function PricingCard() {
           <span className="hidden sm:inline">•</span>
           <div className="flex items-center gap-1">
             <Clock className="w-4 h-4 text-amber-400 animate-spin" />
-            <span>Special Offer Ends In: </span>
+            <span>Onam Special Offer Ends In: </span>
             <span className="font-mono bg-amber-500/20 px-2 py-0.5 rounded text-white font-bold">
               {String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
             </span>
@@ -47,13 +47,13 @@ export default function PricingCard() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 border-2 border-blue-500/50 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden text-center"
+          className="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 border-2 border-amber-500/50 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden text-center"
         >
           {/* Top Glow Accent */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-2 bg-gradient-to-r from-blue-500 via-sky-400 to-indigo-500 rounded-b-full shadow-lg shadow-sky-500/50" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-2 bg-gradient-to-r from-amber-500 via-orange-400 to-amber-500 rounded-b-full shadow-lg shadow-amber-500/50" />
           
-          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-blue-600/20 border border-blue-500/40 text-sky-300 mb-4">
-            Live Online • September 1, 2026
+          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest bg-amber-600/20 border border-amber-500/40 text-amber-300 mb-4">
+            🌺 ONAM SPECIAL OFFER • SEPTEMBER 1, 2026 LIVE
           </span>
 
           <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
@@ -64,14 +64,14 @@ export default function PricingCard() {
           </p>
 
           {/* Pricing Numbers Box */}
-          <div className="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 max-w-md mx-auto mb-8 backdrop-blur-md">
-            <div className="text-xs uppercase font-bold text-slate-400 tracking-wider mb-1">Today's Special Price</div>
+          <div className="bg-slate-900/90 border-2 border-amber-500/30 rounded-3xl p-6 max-w-md mx-auto mb-8 backdrop-blur-md">
+            <div className="text-xs uppercase font-extrabold text-amber-400 tracking-wider mb-1">🌺 Onam Special Price</div>
             <div className="flex items-center justify-center gap-3 mb-2">
-              <span className="text-5xl sm:text-6xl font-black text-white tracking-tight">₹249</span>
+              <span className="text-5xl sm:text-6xl font-black text-amber-300 tracking-tight">₹111</span>
               <div className="text-left">
                 <span className="text-lg text-slate-500 line-through block leading-tight">₹999</span>
                 <span className="text-xs font-bold text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded border border-emerald-500/30">
-                  SAVE 75%
+                  SAVE 89%
                 </span>
               </div>
             </div>
@@ -109,9 +109,9 @@ export default function PricingCard() {
           {/* Large Action Button */}
           <button
             onClick={scrollToRegister}
-            className="w-full max-w-md mx-auto py-4 px-8 rounded-2xl font-bold text-lg text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 transition-all duration-200 shadow-xl shadow-blue-600/40 hover:shadow-2xl active:scale-95 flex items-center justify-center gap-2"
+            className="w-full max-w-md mx-auto py-4 px-8 rounded-2xl font-black text-lg text-white bg-gradient-to-r from-amber-600 via-orange-600 to-amber-500 hover:from-amber-500 hover:to-orange-500 transition-all duration-200 shadow-xl shadow-amber-600/40 hover:shadow-2xl active:scale-95 flex items-center justify-center gap-2"
           >
-            <span>Enroll Now for ₹249</span>
+            <span>Enroll Now for ₹111 (Onam Offer)</span>
             <ArrowRight className="w-5 h-5" />
           </button>
 

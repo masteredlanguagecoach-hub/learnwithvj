@@ -13,7 +13,7 @@ export default function Hero() {
   return (
     <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-slate-950 text-white">
       {/* Background Glow & Lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-600/15 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-1/3 right-10 w-[400px] h-[400px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none" />
       
       {/* Grid Pattern Overlay */}
@@ -32,9 +32,12 @@ export default function Hero() {
               transition={{ duration: 0.5 }}
               className="inline-flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3"
             >
+              <span className="px-3.5 py-1.5 rounded-full text-xs font-black bg-gradient-to-r from-amber-500/30 to-orange-500/30 border border-amber-500/50 text-amber-300 flex items-center gap-1.5 shadow-md">
+                🌺 ONAM SPECIAL OFFER • ₹111 ONLY
+              </span>
               <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-amber-500/20 border border-amber-500/40 text-amber-300 flex items-center gap-1.5 shadow-sm">
                 <Calendar className="w-3.5 h-3.5 text-amber-400" />
-                LIVE WORKSHOP: SEPTEMBER 1, 2026
+                SEPTEMBER 1, 2026 LIVE
               </span>
               <span className="px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center gap-1.5">
                 <Video className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
@@ -50,7 +53,7 @@ export default function Hero() {
               className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1]"
             >
               AI Business System Design{' '}
-              <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-amber-400 via-amber-200 to-yellow-400 bg-clip-text text-transparent">
                 Masterclass
               </span>
             </motion.h1>
@@ -91,22 +94,22 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.25 }}
-              className="inline-flex items-center gap-4 bg-slate-900/80 border border-slate-800 rounded-2xl p-3 px-5 backdrop-blur-md shadow-lg"
+              className="inline-flex items-center gap-4 bg-slate-900/90 border-2 border-amber-500/40 rounded-2xl p-3.5 px-5 backdrop-blur-md shadow-xl"
             >
               <div>
-                <span className="text-xs text-slate-400 block font-medium">Special Workshop Price</span>
+                <span className="text-xs font-bold text-amber-400 block uppercase tracking-wider">🌺 Onam Special Offer</span>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-black text-white">₹249</span>
+                  <span className="text-3xl sm:text-4xl font-black text-amber-300">₹111</span>
                   <span className="text-sm text-slate-500 line-through">₹999</span>
-                  <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
-                    SAVE 75%
+                  <span className="text-xs font-bold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-md border border-emerald-500/30">
+                    SAVE 89%
                   </span>
                 </div>
               </div>
-              <div className="h-8 w-[1px] bg-slate-800" />
+              <div className="h-10 w-[1px] bg-slate-800" />
               <div className="text-left text-xs text-slate-300">
-                <span className="font-semibold text-sky-400 block">✓ Web App + Sheets Database</span>
-                <span>No Code Programming Needed</span>
+                <span className="font-bold text-amber-300 block">✓ Full Masterclass Access</span>
+                <span>Web App + Google Sheets Templates</span>
               </div>
             </motion.div>
 
@@ -119,9 +122,9 @@ export default function Hero() {
             >
               <button
                 onClick={() => scrollToSection('register')}
-                className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-base text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 transition-all duration-200 shadow-xl shadow-blue-600/30 hover:shadow-2xl hover:shadow-blue-600/40 active:scale-95 flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-8 py-4 rounded-xl font-black text-base text-white bg-gradient-to-r from-amber-600 via-orange-600 to-amber-500 hover:from-amber-500 hover:to-orange-500 transition-all duration-200 shadow-xl shadow-amber-600/30 hover:shadow-2xl hover:shadow-amber-600/40 active:scale-95 flex items-center justify-center gap-2"
               >
-                <span>Enroll Now for ₹249</span>
+                <span>Enroll Now for ₹111 (Onam Offer)</span>
                 <ArrowRight className="w-5 h-5" />
               </button>
 
@@ -143,7 +146,7 @@ export default function Hero() {
             className="lg:col-span-5 relative"
           >
             {/* Outer Luxury Frame */}
-            <div className="relative mx-auto max-w-lg lg:max-w-none rounded-3xl bg-slate-900/95 border-2 border-blue-500/40 p-4 sm:p-5 shadow-2xl shadow-blue-600/20 backdrop-blur-xl">
+            <div className="relative mx-auto max-w-lg lg:max-w-none rounded-3xl bg-slate-900/95 border-2 border-amber-500/40 p-4 sm:p-5 shadow-2xl shadow-amber-600/20 backdrop-blur-xl">
               
               {/* Header Bar */}
               <div className="flex items-center justify-between border-b border-slate-800/80 pb-3 mb-3">
@@ -172,7 +175,7 @@ export default function Hero() {
               {/* Bottom Caption Box */}
               <div className="mt-3 bg-slate-950/80 border border-slate-800/80 rounded-xl p-3 flex items-center justify-between">
                 <div className="flex items-center space-x-2.5 text-xs text-slate-300">
-                  <Sparkles className="w-4 h-4 text-sky-400 shrink-0" />
+                  <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
                   <span className="font-semibold text-white">Watch how Veeje converts ideas to complete Web Apps</span>
                 </div>
                 <span className="text-[10px] font-mono font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
