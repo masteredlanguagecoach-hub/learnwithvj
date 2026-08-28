@@ -2,10 +2,23 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ShieldCheck, Calendar } from 'lucide-react';
+import { ArrowRight, Clock, Calendar } from 'lucide-react';
 
 export default function StickyEnrollBar() {
   const [visible, setVisible] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({ hours: 4, minutes: 18, seconds: 45 });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
+        if (prev.minutes > 0) return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
+        if (prev.hours > 0) return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
+        return { hours: 4, minutes: 18, seconds: 45 };
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,11 +60,11 @@ export default function StickyEnrollBar() {
         >
           <div className="max-w-5xl mx-auto px-4 flex items-center justify-between gap-3">
             
-            {/* Price & Event Date Info (Hidden on very small screens, visible on sm+) */}
+            {/* Price & Event Date Info */}
             <div className="hidden sm:flex items-center space-x-3 text-xs">
               <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-300 font-bold">
-                <Calendar className="w-3.5 h-3.5 text-amber-400" />
-                <span>SEPTEMBER 1 LIVE</span>
+                <Clock className="w-3.5 h-3.5 text-amber-400 animate-spin" />
+                <span>OFFER ENDS IN: {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}</span>
               </div>
               <div>
                 <span className="text-slate-400 line-through mr-1 text-[11px]">₹999</span>
@@ -59,10 +72,13 @@ export default function StickyEnrollBar() {
               </div>
             </div>
 
-            {/* Sub-text for mobile */}
+            {/* Mobile Info */}
             <div className="sm:hidden text-left">
-              <span className="text-[10px] text-amber-300 font-bold block">Sept 1 Live Session</span>
-              <span className="text-xs font-black text-emerald-400">Special Price: ₹111</span>
+              <span className="text-[10px] text-amber-300 font-bold flex items-center gap-1">
+                <Clock className="w-3 h-3 text-amber-400 animate-spin" />
+                <span>Ends: {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}</span>
+              </span>
+              <span className="text-xs font-black text-emerald-400">Price: ₹111</span>
             </div>
 
             {/* Sticky Action CTA Button */}

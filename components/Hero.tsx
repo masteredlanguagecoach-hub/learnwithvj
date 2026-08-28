@@ -1,10 +1,24 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Calendar, Clock, Video, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 export default function Hero() {
+  const [timeLeft, setTimeLeft] = useState({ hours: 4, minutes: 18, seconds: 45 });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
+        if (prev.minutes > 0) return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
+        if (prev.hours > 0) return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
+        return { hours: 4, minutes: 18, seconds: 45 };
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   const scrollToRegister = () => {
     const el = document.getElementById('register');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -21,15 +35,25 @@ export default function Hero() {
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-8">
         
-        {/* Eyebrow Badge */}
+        {/* Eyebrow & Countdown Timer Badge */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-600/20 border border-blue-500/40 text-sky-300 text-xs font-bold uppercase tracking-widest shadow-sm"
+          className="inline-flex flex-wrap items-center justify-center gap-2"
         >
-          <Sparkles className="w-3.5 h-3.5 text-sky-400" />
-          <span>LIVE PRACTICAL MASTERCLASS</span>
+          <span className="px-4 py-1.5 rounded-full bg-blue-600/20 border border-blue-500/40 text-sky-300 text-xs font-bold uppercase tracking-widest shadow-sm inline-flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-sky-400" />
+            <span>LIVE PRACTICAL MASTERCLASS</span>
+          </span>
+
+          <span className="px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-bold inline-flex items-center gap-1.5 shadow-sm">
+            <Clock className="w-3.5 h-3.5 text-amber-400 animate-spin" />
+            <span>OFFER ENDS IN: </span>
+            <span className="font-mono bg-amber-500/20 px-2 py-0.5 rounded text-white font-extrabold">
+              {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
+            </span>
+          </span>
         </motion.div>
 
         {/* Headline */}
