@@ -9,10 +9,11 @@ import RegistrationForm from '@/components/RegistrationForm';
 import FAQSection from '@/components/FAQSection';
 import CustomSystemSection from '@/components/CustomSystemSection';
 import Footer from '@/components/Footer';
+import StickyEnrollBar from '@/components/StickyEnrollBar';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 overflow-x-hidden">
+    <main className="min-h-screen bg-slate-950 text-slate-100 overflow-x-hidden pb-16 sm:pb-0">
       {/* Header Navigation */}
       <Navbar />
 
@@ -45,6 +46,9 @@ export default function Home() {
 
       {/* 10. Footer */}
       <Footer />
+
+      {/* Always-visible Sticky Registration Bar */}
+      <StickyEnrollBar />
     </main>
   );
 }
