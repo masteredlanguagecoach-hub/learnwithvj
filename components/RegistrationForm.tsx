@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
-import { ShieldCheck, Lock, Loader2, AlertCircle, User, Mail, Phone, MapPin, Briefcase, HelpCircle, Calendar } from 'lucide-react';
+import { ShieldCheck, Lock, Loader2, AlertCircle, User, Mail, Phone, Calendar } from 'lucide-react';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Please enter your full name'),
@@ -14,9 +14,6 @@ const formSchema = z.object({
     .string()
     .min(10, 'Please enter a valid 10-digit WhatsApp number')
     .regex(/^[0-9+\s-]{10,15}$/, 'Invalid phone number format'),
-  city: z.string().min(2, 'Please enter your city'),
-  profession: z.string().min(2, 'Please select or enter your profession'),
-  problemToSolve: z.string().min(3, 'Please describe what problem you want to solve'),
   course: z.string().default('AI Business System Design Masterclass'),
 });
 
@@ -63,7 +60,7 @@ export default function RegistrationForm() {
     setErrorMessage(null);
 
     try {
-      // 1. Call backend to create Razorpay Order & validate duplicate email
+      // 1. Call backend to create Razorpay Order
       const res = await fetch('/api/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -97,9 +94,6 @@ export default function RegistrationForm() {
           name: data.name,
           email: data.email,
           phone: data.phone,
-          city: data.city,
-          profession: data.profession,
-          problemToSolve: data.problemToSolve,
           course: data.course,
         });
         return;
@@ -111,7 +105,7 @@ export default function RegistrationForm() {
         amount: amount,
         currency: 'INR',
         name: 'Learn with Veeje',
-        description: 'AI Business System Design Masterclass (Onam Offer ₹111)',
+        description: 'AI Business System Design Masterclass (₹111)',
         order_id: orderId,
         prefill: {
           name: data.name,
@@ -119,7 +113,7 @@ export default function RegistrationForm() {
           contact: data.phone,
         },
         theme: {
-          color: '#d97706',
+          color: '#2563eb',
         },
         handler: async function (response: any) {
           await handlePaymentVerification({
@@ -130,9 +124,6 @@ export default function RegistrationForm() {
             name: data.name,
             email: data.email,
             phone: data.phone,
-            city: data.city,
-            profession: data.profession,
-            problemToSolve: data.problemToSolve,
             course: data.course,
           });
         },
@@ -161,9 +152,6 @@ export default function RegistrationForm() {
     name: string;
     email: string;
     phone: string;
-    city: string;
-    profession: string;
-    problemToSolve: string;
     course: string;
   }) => {
     try {
@@ -194,27 +182,27 @@ export default function RegistrationForm() {
   };
 
   return (
-    <section id="register" className="py-20 md:py-28 bg-slate-950 text-white relative">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="register" className="py-16 md:py-24 bg-slate-950 text-white relative">
+      <div className="max-w-xl mx-auto px-4 sm:px-6 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-xl mx-auto mb-10 space-y-3">
-          <span className="text-xs font-black uppercase tracking-widest text-amber-300 bg-amber-500/20 px-3.5 py-1.5 rounded-full border border-amber-500/30 inline-flex items-center gap-1.5 shadow-sm">
-            🌺 ONAM SPECIAL OFFER • SEPTEMBER 1, 2026
+        <div className="text-center max-w-lg mx-auto mb-8 space-y-2">
+          <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-full border border-emerald-500/20 inline-flex items-center gap-1.5">
+            <Calendar className="w-3.5 h-3.5" /> Live Session: September 1, 2026 (7:30 PM)
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-            Reserve Your Seat Now
+            Reserve Your Seat — ₹111
           </h2>
-          <p className="text-slate-300 text-sm sm:text-base">
-            Fill in your details below to proceed to the secure Razorpay payment checkout.
+          <p className="text-slate-300 text-sm">
+            Enter your name, WhatsApp number and email to join the live masterclass.
           </p>
         </div>
 
         {/* Form Container */}
-        <div className="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-xl">
+        <div className="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-xl">
           
           {errorMessage && (
-            <div className="mb-6 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-sm flex items-start gap-3">
+            <div className="mb-5 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-start gap-3">
               <AlertCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
               <div>
                 <span className="font-bold block">Registration Notice</span>
@@ -223,162 +211,96 @@ export default function RegistrationForm() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Hidden Course Field */}
             <input type="hidden" {...register('course')} />
 
             {/* Full Name */}
             <div>
-              <label className="block text-xs font-bold uppercase text-slate-300 tracking-wider mb-1.5">
+              <label className="block text-xs font-bold uppercase text-slate-300 tracking-wider mb-1">
                 Full Name *
               </label>
               <div className="relative">
-                <User className="w-5 h-5 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <User className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   placeholder="e.g. Rahul Sharma"
                   {...register('name')}
-                  className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm font-medium transition-all"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm font-medium transition-all"
                 />
               </div>
               {errors.name && <p className="mt-1 text-xs text-rose-400">{errors.name.message}</p>}
             </div>
 
-            {/* Email & Phone Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {/* Email Address */}
-              <div>
-                <label className="block text-xs font-bold uppercase text-slate-300 tracking-wider mb-1.5">
-                  Email Address *
-                </label>
-                <div className="relative">
-                  <Mail className="w-5 h-5 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                  <input
-                    type="email"
-                    placeholder="rahul@example.com"
-                    {...register('email')}
-                    className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm font-medium transition-all"
-                  />
-                </div>
-                {errors.email && <p className="mt-1 text-xs text-rose-400">{errors.email.message}</p>}
-              </div>
-
-              {/* WhatsApp Number */}
-              <div>
-                <label className="block text-xs font-bold uppercase text-slate-300 tracking-wider mb-1.5">
-                  WhatsApp Number *
-                </label>
-                <div className="relative">
-                  <Phone className="w-5 h-5 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                  <input
-                    type="tel"
-                    placeholder="10-digit WhatsApp number"
-                    {...register('phone')}
-                    className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm font-medium transition-all"
-                  />
-                </div>
-                {errors.phone && <p className="mt-1 text-xs text-rose-400">{errors.phone.message}</p>}
-              </div>
-            </div>
-
-            {/* City & Profession Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {/* City */}
-              <div>
-                <label className="block text-xs font-bold uppercase text-slate-300 tracking-wider mb-1.5">
-                  City *
-                </label>
-                <div className="relative">
-                  <MapPin className="w-5 h-5 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                  <input
-                    type="text"
-                    placeholder="e.g. Mumbai, Bengaluru, Kochi"
-                    {...register('city')}
-                    className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm font-medium transition-all"
-                  />
-                </div>
-                {errors.city && <p className="mt-1 text-xs text-rose-400">{errors.city.message}</p>}
-              </div>
-
-              {/* Profession */}
-              <div>
-                <label className="block text-xs font-bold uppercase text-slate-300 tracking-wider mb-1.5">
-                  Profession *
-                </label>
-                <div className="relative">
-                  <Briefcase className="w-5 h-5 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                  <select
-                    {...register('profession')}
-                    className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm font-medium transition-all appearance-none cursor-pointer"
-                  >
-                    <option value="">Select Profession</option>
-                    <option value="Business Owner">Business Owner</option>
-                    <option value="Student">Student</option>
-                    <option value="Office Staff / Analyst">Office Staff / Analyst</option>
-                    <option value="Manager / Team Lead">Manager / Team Lead</option>
-                    <option value="HR Professional">HR Professional</option>
-                    <option value="Sales / Marketing">Sales / Marketing</option>
-                    <option value="Teacher / Educator">Teacher / Educator</option>
-                    <option value="Freelancer / Consultant">Freelancer / Consultant</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-                {errors.profession && <p className="mt-1 text-xs text-rose-400">{errors.profession.message}</p>}
-              </div>
-            </div>
-
-            {/* Problem to solve field */}
+            {/* WhatsApp Number */}
             <div>
-              <label className="block text-xs font-bold uppercase text-slate-300 tracking-wider mb-1.5">
-                What Problem Do You Want To Solve By This Session? *
+              <label className="block text-xs font-bold uppercase text-slate-300 tracking-wider mb-1">
+                WhatsApp Number *
               </label>
               <div className="relative">
-                <HelpCircle className="w-5 h-5 text-slate-500 absolute left-3.5 top-4" />
-                <textarea
-                  rows={3}
-                  placeholder="e.g. I want to build an automated attendance & payroll system for my 20 employees / build a CRM dashboard..."
-                  {...register('problemToSolve')}
-                  className="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm font-medium transition-all"
+                <Phone className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type="tel"
+                  placeholder="10-digit WhatsApp number"
+                  {...register('phone')}
+                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm font-medium transition-all"
                 />
               </div>
-              {errors.problemToSolve && <p className="mt-1 text-xs text-rose-400">{errors.problemToSolve.message}</p>}
+              {errors.phone && <p className="mt-1 text-xs text-rose-400">{errors.phone.message}</p>}
+            </div>
+
+            {/* Email Address */}
+            <div>
+              <label className="block text-xs font-bold uppercase text-slate-300 tracking-wider mb-1">
+                Email Address *
+              </label>
+              <div className="relative">
+                <Mail className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type="email"
+                  placeholder="rahul@example.com"
+                  {...register('email')}
+                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm font-medium transition-all"
+                />
+              </div>
+              {errors.email && <p className="mt-1 text-xs text-rose-400">{errors.email.message}</p>}
             </div>
 
             {/* Price & Submit CTA Box */}
-            <div className="pt-4 border-t border-slate-800">
-              <div className="flex items-center justify-between mb-4 bg-slate-950/80 p-4 rounded-2xl border border-amber-500/30">
+            <div className="pt-3 border-t border-slate-800 space-y-3">
+              <div className="flex items-center justify-between bg-slate-950/80 p-3.5 rounded-xl border border-slate-800">
                 <div>
-                  <span className="text-xs text-amber-400 font-bold block">🌺 Onam Special Offer Payable</span>
-                  <span className="text-xs text-slate-400">Includes Masterclass + Web App Templates</span>
+                  <span className="text-xs text-slate-300 font-bold block">Total Registration Fee</span>
+                  <span className="text-[11px] text-slate-400">Masterclass + System Templates</span>
                 </div>
                 <div className="text-right">
                   <span className="text-xs text-slate-500 line-through mr-2">₹999</span>
-                  <span className="text-3xl font-black text-amber-300">₹111</span>
+                  <span className="text-2xl font-extrabold text-emerald-400">₹111</span>
                 </div>
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 rounded-2xl font-black text-base text-white bg-gradient-to-r from-amber-600 via-orange-600 to-amber-500 hover:from-amber-500 hover:to-orange-500 transition-all duration-200 shadow-xl shadow-amber-600/30 active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-4 rounded-xl font-bold text-sm sm:text-base text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 transition-all duration-200 shadow-xl shadow-blue-600/30 active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Initializing Secure Checkout...</span>
+                    <span>Initializing Checkout...</span>
                   </>
                 ) : (
                   <>
-                    <Lock className="w-5 h-5 text-amber-200" />
-                    <span>Proceed to Pay ₹111 (Onam Special Offer)</span>
+                    <Lock className="w-4 h-4 text-blue-200" />
+                    <span>JOIN THE LIVE WORKSHOP FOR ₹111</span>
                   </>
                 )}
               </button>
-            </div>
 
-            <div className="pt-2 text-center text-xs text-slate-400 flex items-center justify-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>Razorpay 256-Bit SSL Encrypted Verification • Instant Confirmation</span>
+              <p className="text-center text-xs text-slate-400 flex items-center justify-center gap-1.5 pt-1">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <span>Secure Razorpay payment • Instant confirmation</span>
+              </p>
             </div>
 
           </form>

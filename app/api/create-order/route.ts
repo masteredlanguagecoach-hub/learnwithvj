@@ -8,9 +8,9 @@ const registrationSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
   phone: z.string().min(10, 'Phone number must be at least 10 digits'),
-  city: z.string().min(2, 'City is required'),
-  profession: z.string().min(2, 'Profession is required'),
-  problemToSolve: z.string().min(3, 'Please describe what problem you want to solve'),
+  city: z.string().optional().default(''),
+  profession: z.string().optional().default(''),
+  problemToSolve: z.string().optional().default(''),
   course: z.string().default('AI Business System Design Masterclass'),
 });
 
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     }
 
     const registrationId = generateRegistrationId();
-    const amountInPaise = 111 * 100; // ₹111 Onam Special Offer (11100 paise)
+    const amountInPaise = 111 * 100; // ₹111 (11100 paise)
 
     let orderId = `order_live_${Date.now()}`;
 
@@ -47,9 +47,8 @@ export async function POST(req: Request) {
           studentName: validatedData.name,
           studentEmail: validatedData.email,
           studentPhone: validatedData.phone,
-          problemToSolve: validatedData.problemToSolve,
           eventDate: 'September 1, 2026',
-          offer: 'Onam Special Offer ₹111',
+          offer: 'Special Offer ₹111',
         },
       });
       if (order && order.id) {
@@ -68,9 +67,9 @@ export async function POST(req: Request) {
       name: validatedData.name,
       email: validatedData.email,
       phone: validatedData.phone,
-      city: validatedData.city,
-      profession: validatedData.profession,
-      problemToSolve: validatedData.problemToSolve,
+      city: validatedData.city || '',
+      profession: validatedData.profession || '',
+      problemToSolve: validatedData.problemToSolve || '',
       course: validatedData.course,
       paymentId: '',
       orderId,

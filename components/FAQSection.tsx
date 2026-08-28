@@ -1,88 +1,82 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 
-const faqs = [
-  {
-    q: 'Who can join this workshop?',
-    a: 'Anyone! Whether you are a business owner, student, HR manager, sales representative, office staff, freelancer, or educator, this workshop is designed to turn your data into visual dashboards and automate your work using Google Sheets and AI.',
-  },
-  {
-    q: 'Do I need coding experience?',
-    a: 'No prior coding experience is required. We teach you how to use AI (like ChatGPT and Gemini) to write formulas and Apps Script automation code using plain English prompts.',
-  },
-  {
-    q: 'Is it beginner friendly?',
-    a: 'Yes, 100%! We start from fundamental data structuring principles and step-by-step progress to advanced Google Sheets formulas, pivot dashboards, and AI tools in a simple, easy-to-follow format.',
-  },
-  {
-    q: 'How will I attend the live workshop?',
-    a: 'The workshop is conducted Live Online via Google Meet. You can join from your laptop, desktop, or mobile device with an active internet connection.',
-  },
-  {
-    q: 'How do I receive joining details?',
-    a: 'Immediately after successful payment verification, you will be redirected to the Success Page with a direct button to join our exclusive WhatsApp Student Group. All Google Meet joining links, dates, and bonus dashboard templates will be shared inside the group and sent to your email.',
-  },
-];
-
 export default function FAQSection() {
-  const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const toggle = (idx: number) => {
-    setOpenIdx(openIdx === idx ? null : idx);
-  };
+  const faqs = [
+    {
+      q: 'Do I need prior programming or coding experience?',
+      a: 'No. The AI Business System Design Masterclass is beginner friendly and designed for business owners, managers, staff, freelancers and students without traditional coding backgrounds.',
+    },
+    {
+      q: 'What is the date and time of the live session?',
+      a: 'The live workshop takes place on September 1, 2026 at 7:30 PM (2 Hours 30 Minutes live online session).',
+    },
+    {
+      q: 'Will I get access to session resources and group support?',
+      a: 'Yes! Upon successful registration, you will receive instant access to our official student WhatsApp group where live Google Meet links, templates and updates are shared.',
+    },
+    {
+      q: 'What tools will be covered in the workshop?',
+      a: 'You will learn how Google Sheets, AI (ChatGPT/Claude), and Web App forms work together to create practical digital systems for business requirements.',
+    },
+    {
+      q: 'Is payment secure?',
+      a: 'Yes. All registrations are processed securely via Razorpay with 256-bit SSL encryption and instant confirmation.',
+    },
+  ];
 
   return (
-    <section id="faq" className="py-20 md:py-28 bg-slate-900/60 border-t border-slate-800 text-white relative">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="faq" className="py-16 md:py-24 bg-slate-950 text-white border-t border-slate-800">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-sky-400 bg-sky-500/10 px-3.5 py-1.5 rounded-full border border-sky-500/20 inline-block">
-            Clear Answers
+        <div className="text-center max-w-2xl mx-auto space-y-2">
+          <span className="text-xs font-bold uppercase tracking-widest text-sky-400 bg-sky-500/10 px-3.5 py-1.5 rounded-full border border-sky-500/20 inline-flex items-center gap-1.5">
+            <HelpCircle className="w-3.5 h-3.5 text-sky-400" /> GOT QUESTIONS?
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
             Frequently Asked Questions
           </h2>
-          <p className="text-slate-300 text-sm sm:text-base">
-            Everything you need to know about the AI Business Intelligence Masterclass.
-          </p>
         </div>
 
-        {/* FAQ Accordion */}
-        <div className="space-y-4">
-          {faqs.map((faq, idx) => {
-            const isOpen = openIdx === idx;
+        {/* Accordion */}
+        <div className="space-y-3">
+          {faqs.map((faq, i) => {
+            const isOpen = openIndex === i;
             return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: idx * 0.05 }}
-                className="bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden transition-all duration-200"
+              <div
+                key={faq.q}
+                className="bg-slate-900/90 border border-slate-800 rounded-2xl overflow-hidden transition-colors"
               >
                 <button
-                  onClick={() => toggle(idx)}
-                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between hover:bg-slate-900/50 transition-colors cursor-pointer"
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-white hover:text-sky-300 transition-colors"
                 >
-                  <div className="flex items-center space-x-3 pr-4">
-                    <HelpCircle className="w-5 h-5 text-blue-400 shrink-0" />
-                    <span className="text-base sm:text-lg font-bold text-white">{faq.q}</span>
-                  </div>
-                  <div className={`w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 transition-transform duration-300 shrink-0 ${isOpen ? 'rotate-180 text-white' : ''}`}>
-                    <ChevronDown className="w-5 h-5" />
-                  </div>
+                  <span>{faq.q}</span>
+                  <ChevronDown className={`w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180 text-sky-400' : ''}`} />
                 </button>
 
-                {isOpen && (
-                  <div className="px-6 pb-6 pt-2 text-slate-300 text-sm sm:text-base leading-relaxed border-t border-slate-900 bg-slate-950/80">
-                    {faq.a}
-                  </div>
-                )}
-              </motion.div>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-300 border-t border-slate-800/60 leading-relaxed">
+                        {faq.a}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             );
           })}
         </div>
