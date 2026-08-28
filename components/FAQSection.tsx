@@ -13,8 +13,8 @@ export default function FAQSection() {
       a: 'No. The AI Business System Design Masterclass is beginner friendly and designed for business owners, managers, staff, freelancers and students without traditional coding backgrounds.',
     },
     {
-      q: 'What is the date and time of the live session?',
-      a: 'The live workshop takes place on September 1, 2026 at 7:30 PM (2 Hours 30 Minutes live online session).',
+      q: 'What are the dates and duration of the workshop?',
+      a: 'The live workshop takes place over 2 days (September 1 & 2, 2026) at 7:30 PM daily (2 Hours 30 Minutes per session, total 5 hours of live practical training).',
     },
     {
       q: 'Will I get access to session resources and group support?',

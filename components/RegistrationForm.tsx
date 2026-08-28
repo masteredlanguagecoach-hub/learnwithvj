@@ -105,7 +105,7 @@ export default function RegistrationForm() {
         amount: amount,
         currency: 'INR',
         name: 'Learn with Veeje',
-        description: 'AI Business System Design Masterclass (₹111)',
+        description: '2-Day AI Business System Design Masterclass (₹111)',
         order_id: orderId,
         prefill: {
           name: data.name,
@@ -188,7 +188,7 @@ export default function RegistrationForm() {
         {/* Header */}
         <div className="text-center max-w-lg mx-auto mb-8 space-y-2">
           <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-full border border-emerald-500/20 inline-flex items-center gap-1.5">
-            <Calendar className="w-3.5 h-3.5" /> Live Session: September 1, 2026 (7:30 PM)
+            <Calendar className="w-3.5 h-3.5" /> 2-Day Session: Sept 1 & 2, 2026 (7:30 PM Daily • 2:30 Hrs/Day)
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
             Reserve Your Seat — ₹111
@@ -271,7 +271,7 @@ export default function RegistrationForm() {
               <div className="flex items-center justify-between bg-slate-950/80 p-3.5 rounded-xl border border-slate-800">
                 <div>
                   <span className="text-xs text-slate-300 font-bold block">Total Registration Fee</span>
-                  <span className="text-[11px] text-slate-400">Masterclass + System Templates</span>
+                  <span className="text-[11px] text-slate-400">2 Days Masterclass + System Templates</span>
                 </div>
                 <div className="text-right">
                   <span className="text-xs text-slate-500 line-through mr-2">₹999</span>
@@ -292,7 +292,7 @@ export default function RegistrationForm() {
                 ) : (
                   <>
                     <Lock className="w-4 h-4 text-blue-200" />
-                    <span>JOIN THE LIVE WORKSHOP FOR ₹111</span>
+                    <span>JOIN 2-DAY LIVE WORKSHOP FOR ₹111</span>
                   </>
                 )}
               </button>

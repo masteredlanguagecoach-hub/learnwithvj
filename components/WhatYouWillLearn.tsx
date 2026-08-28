@@ -2,14 +2,9 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Layers, CheckCircle2, Cpu, Database, Layout, Sparkles, ArrowRight } from 'lucide-react';
+import { Layers, Cpu, Database, Layout, Sparkles } from 'lucide-react';
 
 export default function WhatYouWillLearn() {
-  const scrollToRegister = () => {
-    const el = document.getElementById('register');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <section id="what-you-will-learn" className="py-16 md:py-24 bg-slate-900/40 border-t border-slate-800 text-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
@@ -20,10 +15,10 @@ export default function WhatYouWillLearn() {
             <Layers className="w-3.5 h-3.5" /> REPEATABLE FRAMEWORK
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-            What You Will Learn in the Live Workshop
+            What You Will Learn in the Live 2-Day Workshop
           </h2>
           <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-            In this 2.5-hour live session of the <strong>AI Business System Design Masterclass</strong>, one practical system-building process will be demonstrated step by step. You will master a repeatable framework that can be applied to your own business systems.
+            In this 2-day live workshop (2:30 hours daily) of the <strong>AI Business System Design Masterclass</strong>, practical system-building processes will be demonstrated step by step. You will master a repeatable framework that can be applied to your own business systems.
           </p>
         </div>
 

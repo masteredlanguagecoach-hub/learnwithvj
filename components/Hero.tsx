@@ -44,7 +44,7 @@ export default function Hero() {
         >
           <span className="px-4 py-1.5 rounded-full bg-blue-600/20 border border-blue-500/40 text-sky-300 text-xs font-bold uppercase tracking-widest shadow-sm inline-flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-sky-400" />
-            <span>LIVE PRACTICAL MASTERCLASS</span>
+            <span>2 DAYS LIVE PRACTICAL MASTERCLASS</span>
           </span>
 
           <span className="px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-bold inline-flex items-center gap-1.5 shadow-sm">
@@ -97,13 +97,13 @@ export default function Hero() {
           className="flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm text-slate-200"
         >
           <span className="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2 font-bold text-amber-300">
-            <Calendar className="w-4 h-4 text-amber-400" /> September 1, 2026
+            <Calendar className="w-4 h-4 text-amber-400" /> September 1 & 2, 2026
           </span>
           <span className="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2 font-bold text-sky-300">
-            <Clock className="w-4 h-4 text-sky-400" /> 7:30 PM
+            <Clock className="w-4 h-4 text-sky-400" /> 7:30 PM Daily
           </span>
           <span className="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2 font-semibold text-emerald-400">
-            <Video className="w-4 h-4 text-emerald-400" /> Live Online (2 Hours 30 Mins)
+            <Video className="w-4 h-4 text-emerald-400" /> 2 Days (2:30 Hours / Day)
           </span>
           <span className="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2 font-semibold text-indigo-300">
             <CheckCircle2 className="w-4 h-4 text-indigo-400" /> Beginner Friendly

@@ -2,14 +2,14 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Gift, ShieldCheck, Video, FileText, MessageSquare, Award } from 'lucide-react';
+import { Gift, ShieldCheck, Video, FileText, MessageSquare, Award } from 'lucide-react';
 
 export default function WorkshopInclusions() {
   const inclusions = [
     {
       icon: Video,
-      title: '2.5 Hours Live Masterclass Access',
-      desc: 'Join the live interactive workshop on September 1, 2026 at 7:30 PM.',
+      title: '2 Days Live Masterclass Access',
+      desc: 'Join the live interactive workshop on September 1 & 2, 2026 at 7:30 PM (2:30 Hrs Daily).',
     },
     {
       icon: FileText,
