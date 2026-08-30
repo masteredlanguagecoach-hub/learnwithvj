@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Sparkles, MessageSquare, ShieldCheck } from 'lucide-react';
+import { Sparkles, MessageSquare, ShieldCheck, Lock } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -32,6 +32,13 @@ export default function Footer() {
             </Link>
             <Link href="/terms" className="hover:text-white transition-colors">
               Terms & Conditions
+            </Link>
+            <Link
+              href="/admin"
+              className="hover:text-sky-400 transition-colors flex items-center gap-1 font-semibold text-slate-300 hover:text-sky-300"
+            >
+              <Lock className="w-3.5 h-3.5 text-sky-400" />
+              <span>Admin Dashboard</span>
             </Link>
             <a
               href="https://wa.me/916282548226"
