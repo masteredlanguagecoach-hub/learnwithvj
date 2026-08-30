@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Sparkles, ArrowRight, Menu, X } from 'lucide-react';
+import Link from 'next/link';
+import { Sparkles, ArrowRight, Menu, X, Lock } from 'lucide-react';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -51,7 +52,7 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Nav Links */}
-        <nav className="hidden md:flex items-center space-x-7 text-sm font-medium text-slate-300">
+        <nav className="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-300">
           <button onClick={() => scrollToSection('value-section')} className="hover:text-blue-400 transition-colors">
             Why Learn
           </button>
@@ -67,6 +68,10 @@ export default function Navbar() {
           <button onClick={() => scrollToSection('custom-systems')} className="hover:text-amber-400 transition-colors">
             Custom Systems
           </button>
+          <Link href="/admin" className="text-sky-400 hover:text-sky-300 transition-colors font-semibold flex items-center gap-1">
+            <Lock className="w-3.5 h-3.5" />
+            <span>Admin</span>
+          </Link>
         </nav>
 
         {/* CTA Button */}
@@ -113,6 +118,10 @@ export default function Navbar() {
             <button onClick={() => scrollToSection('custom-systems')} className="text-left py-2 text-amber-400 font-semibold">
               Custom Business Systems
             </button>
+            <Link href="/admin" onClick={() => setMobileMenuOpen(false)} className="text-left py-2 text-sky-400 font-bold flex items-center gap-1.5">
+              <Lock className="w-4 h-4 text-sky-400" />
+              <span>Admin Dashboard</span>
+            </Link>
           </div>
           <div className="pt-2 border-t border-slate-800 flex items-center justify-between">
             <div>

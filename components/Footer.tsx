@@ -8,7 +8,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-950 border-t border-slate-800 text-slate-400 text-xs py-12">
+    <footer className="bg-slate-950 border-t border-slate-800 text-slate-400 text-xs pt-12 pb-28 sm:pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -35,7 +35,7 @@ export default function Footer() {
             </Link>
             <Link
               href="/admin"
-              className="hover:text-sky-400 transition-colors flex items-center gap-1 font-semibold text-slate-300 hover:text-sky-300"
+              className="px-3.5 py-1.5 rounded-xl bg-sky-500/15 border border-sky-500/30 text-sky-300 hover:bg-sky-500/25 hover:text-white transition-all font-bold flex items-center gap-1.5 shadow-sm"
             >
               <Lock className="w-3.5 h-3.5 text-sky-400" />
               <span>Admin Dashboard</span>
