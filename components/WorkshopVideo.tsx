@@ -41,7 +41,7 @@ export default function WorkshopVideo() {
         >
           <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-950 border border-slate-800">
             <iframe
-              src="https://www.youtube.com/embed/j0ojPumgmBg?rel=0&autoplay=0"
+              src="https://www.youtube.com/embed/7ukHJqVf3AY?rel=0&autoplay=0"
               title="See How Business Ideas Become Working Systems"
               className="absolute top-0 left-0 w-full h-full rounded-2xl"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
